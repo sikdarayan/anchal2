@@ -564,6 +564,220 @@ svg.saree-art{
   height:100%;
   display:block;
 }
+
+.code-tag{
+  display:inline-block;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.66rem;
+  font-weight:600;
+  color:var(--rose);
+  background:var(--blush);
+  padding:2px 7px;
+  border-radius:6px;
+  letter-spacing:.03em;
+  margin-right:6px;
+  vertical-align:middle;
+}
+.code-readonly{
+  background:var(--blush) !important;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
+  font-weight:600 !important;
+  color:var(--rose) !important;
+  cursor:not-allowed;
+  letter-spacing:.04em;
+}
+
+/* ============ ACTIVITY TIMELINE ============ */
+.tl-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tl-chip{
+  padding:8px 16px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-size:.8rem;color:var(--muted);cursor:pointer;
+  transition:.2s;font-family:inherit;min-height:38px;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.tl-chip:hover{border-color:var(--rose);color:var(--rose)}
+.tl-chip.active{background:var(--rose);border-color:var(--rose);color:#fff}
+.tl-chip .cnt{
+  background:rgba(0,0,0,.08);padding:1px 7px;border-radius:999px;
+  font-size:.7rem;font-weight:600;
+}
+.tl-chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
+
+.timeline{position:relative;padding-left:34px}
+.timeline::before{
+  content:'';position:absolute;left:15px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(180deg,var(--line),transparent);
+}
+.tl-item{
+  position:relative;padding:12px 0 14px;border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;
+}
+.tl-item:last-child{border-bottom:0}
+.tl-icon{
+  position:absolute;left:-34px;top:12px;
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;font-size:.85rem;
+  background:#fff;border:2px solid #fff;
+  box-shadow:0 2px 8px -3px rgba(74,20,40,.25);
+}
+.tl-icon.add{background:#F5E5EC;color:#A63D5C}
+.tl-icon.remove{background:#F0F0F0;color:#8A6B76}
+.tl-icon.wa{background:#DCF5E5;color:#1FA855}
+
+.tl-main{min-width:0}
+.tl-title{font-size:.88rem;font-weight:500;line-height:1.4;margin-bottom:3px}
+.tl-title b{color:var(--ink);font-weight:600}
+.tl-meta{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tl-code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.68rem;font-weight:600;color:var(--rose);
+  background:var(--blush);padding:2px 6px;border-radius:5px;letter-spacing:.03em;
+}
+.tl-time{font-size:.72rem;color:var(--muted);white-space:nowrap;text-align:right}
+
+.tl-empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:.86rem}
+
+@media (max-width:640px){
+  .timeline{padding-left:28px}
+  .timeline::before{left:13px}
+  .tl-icon{left:-28px;width:26px;height:26px;font-size:.75rem}
+  .tl-item{grid-template-columns:1fr;gap:4px}
+  .tl-time{text-align:left;font-size:.68rem}
+}
+
+/* ============================================================
+   PER-SAREE BREAKDOWN — mobile card layout
+   ============================================================ */
+.breakdown-table th,
+.breakdown-table td{
+  font-size:.82rem;
+}
+
+@media (max-width:880px){
+  .breakdown-table th,
+  .breakdown-table td{
+    padding:9px 6px !important;
+    font-size:.78rem;
+  }
+  .breakdown-table th{font-size:.62rem !important;letter-spacing:.08em !important}
+}
+
+@media (max-width:640px){
+  .breakdown-table,
+  .breakdown-table thead,
+  .breakdown-table tbody,
+  .breakdown-table tr,
+  .breakdown-table td{
+    display:block;
+    width:100%;
+  }
+  .breakdown-table thead{display:none}
+
+  .breakdown-table tr{
+    background:#fff;
+    border-radius:12px;
+    margin-bottom:10px;
+    padding:12px 14px;
+    border:1px solid var(--line) !important;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 12px;
+  }
+  .breakdown-table tr:last-child{margin-bottom:0}
+
+  .breakdown-table td[data-label="Saree"]{
+    grid-column:1 / -1;
+    padding:0 0 8px !important;
+    border-bottom:1px solid var(--line);
+    font-size:.84rem !important;
+    line-height:1.35;
+  }
+
+  .breakdown-table td[data-label]:not([data-label="Saree"]){
+    padding:8px 0 !important;
+    text-align:left !important;
+    font-size:.85rem !important;
+    position:relative;
+    padding-left:64px !important;
+  }
+  .breakdown-table td[data-label]:not([data-label="Saree"])::before{
+    content:attr(data-label);
+    position:absolute;
+    left:0;
+    top:8px;
+    font-size:.66rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .tl-filters{gap:6px;margin-bottom:14px}
+  .tl-chip{
+    padding:7px 13px;
+    font-size:.74rem;
+    min-height:36px;
+    gap:5px;
+  }
+  .tl-chip .cnt{font-size:.66rem;padding:1px 6px}
+}
+
+@media (max-width:480px){
+  .breakdown-table tr{padding:10px 12px;gap:6px 10px}
+  .breakdown-table td[data-label="Saree"]{font-size:.8rem !important}
+  .breakdown-table td[data-label]:not([data-label="Saree"]){
+    font-size:.8rem !important;
+    padding-left:58px !important;
+  }
+  .breakdown-table td[data-label]:not([data-label="Saree"])::before{
+    font-size:.6rem;
+    top:9px;
+  }
+}
+
+@media (max-width:380px){
+  .tl-chip{font-size:.7rem;padding:6px 11px;min-height:34px}
+}
+
+/* ============ TIMELINE — SHOW MORE ============ */
+.tl-more-wrap{
+  display:flex;
+  justify-content:center;
+  padding:22px 0 6px;
+  margin-top:8px;
+  border-top:1px solid var(--line);
+}
+.tl-more-wrap .btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 24px;
+  font-size:.85rem;
+}
+.tl-more-count{
+  font-size:.7rem;
+  font-weight:500;
+  color:var(--muted);
+  background:var(--blush);
+  padding:3px 9px;
+  border-radius:999px;
+  letter-spacing:.02em;
+}
+.tl-more-wrap .btn:hover .tl-more-count{
+  background:var(--blush-2);
+  color:var(--rose);
+}
+
+@media (max-width:640px){
+  .tl-more-wrap{padding:18px 0 4px}
+  .tl-more-wrap .btn{
+    width:100%;
+    justify-content:center;
+    padding:12px 18px;
+    font-size:.82rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -594,6 +808,12 @@ function logoMarkup(){
    ========================================================================= */
 let SAREES = [];
 let FAVOURITE_COUNTS = {};   // { saree_id: count }
+let FAV_EVENTS = [];         // [{ saree_id, created_at }, ...]
+let WA_EVENTS = [];          // [{ saree_id, created_at }, ...]
+let ACTIVITY = [];           // [{ id, saree_id, event_type, created_at }, ...]
+let TIMELINE_FILTER = 'all'; // all | added | removed | enquiry
+let TIMELINE_SHOWN = 10;     // how many events are currently visible
+const TIMELINE_PAGE_SIZE = 10;
 let SESSION = null;
 let svgUid = 0;
 let liveChannel = null;
@@ -610,7 +830,35 @@ let ADD_FILE_URL = null;
    HELPERS
    ========================================================================= */
 const money = n => '₹' + Number(n).toLocaleString('en-IN');
-const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
+
+function starsStr(n){
+  n = Math.round(n);
+  return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n));
+}
+
+function timeAgo(ts){
+  const now = Date.now();
+  const then = new Date(ts).getTime();
+  const s = Math.floor((now - then) / 1000);
+  if(s < 5) return 'just now';
+  if(s < 60) return s + ' sec ago';
+  if(s < 3600) return Math.floor(s / 60) + ' min ago';
+  if(s < 86400) return Math.floor(s / 3600) + ' hr ago';
+  if(s < 604800){
+    const d = Math.floor(s / 86400);
+    return d + ' day' + (d === 1 ? '' : 's') + ' ago';
+  }
+  if(s < 2592000){
+    const w = Math.floor(s / 604800);
+    return w + ' week' + (w === 1 ? '' : 's') + ' ago';
+  }
+  return new Date(ts).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
 const findSaree = id => SAREES.find(s => s.id === id);
 
 function sareeArt(p){
@@ -642,9 +890,18 @@ async function loadSarees(){
 }
 async function loadFavouriteCounts(){
   if(!sb) return;
-  const { data } = await sb.from('favourites').select('saree_id');
+  const [favRes, waRes, actRes] = await Promise.all([
+    sb.from('favourites').select('saree_id, created_at'),
+    sb.from('whatsapp_enquiries').select('saree_id, created_at'),
+    sb.from('activity_log').select('id, saree_id, event_type, created_at')
+      .order('created_at', { ascending: false }).limit(200)
+  ]);
+  FAV_EVENTS = favRes.data || [];
+  WA_EVENTS = waRes.data || [];
+  ACTIVITY = actRes.data || [];
+
   const counts = {};
-  (data || []).forEach(r => { counts[r.saree_id] = (counts[r.saree_id] || 0) + 1; });
+  FAV_EVENTS.forEach(r => { counts[r.saree_id] = (counts[r.saree_id] || 0) + 1; });
   FAVOURITE_COUNTS = counts;
 }
 async function loadSession(){
@@ -711,8 +968,16 @@ async function handleResetRedirect(){
    ========================================================================= */
 function subscribeRealtime(){
   if(!sb || liveChannel) return;
-  liveChannel = sb.channel('favourites_live')
+  liveChannel = sb.channel('admin_live')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'favourites' }, async () => {
+      await loadFavouriteCounts();
+      render();
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'whatsapp_enquiries' }, async () => {
+      await loadFavouriteCounts();
+      render();
+    })
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity_log' }, async () => {
       await loadFavouriteCounts();
       render();
     })
@@ -784,6 +1049,187 @@ function renderStockDonut(){
       <text x="${CX}" y="${CY + 18}" text-anchor="middle" font-size="11" fill="#8A6B76">Sarees</text>
     </svg>
     <div class="legend">${legend}</div>`;
+}
+
+function renderEnquiryTrendChart(){
+  const days = 14;
+  const dayMs = 86400000;
+  const nowEnd = new Date();
+  nowEnd.setHours(23,59,59,999);
+  const nowTs = nowEnd.getTime();
+
+  const favBuckets = Array(days).fill(0);
+  const waBuckets  = Array(days).fill(0);
+  const labels = [];
+
+  for(let i = days - 1; i >= 0; i--){
+    const d = new Date(nowTs - i * dayMs);
+    labels.push(d.toLocaleDateString('en-IN', { day:'numeric', month:'short' }));
+  }
+
+  FAV_EVENTS.forEach(e => {
+    const ts = new Date(e.created_at).getTime();
+    const idx = days - 1 - Math.floor((nowTs - ts) / dayMs);
+    if(idx >= 0 && idx < days) favBuckets[idx]++;
+  });
+  WA_EVENTS.forEach(e => {
+    const ts = new Date(e.created_at).getTime();
+    const idx = days - 1 - Math.floor((nowTs - ts) / dayMs);
+    if(idx >= 0 && idx < days) waBuckets[idx]++;
+  });
+
+  const totalFav = favBuckets.reduce((s,n) => s+n, 0);
+  const totalWa  = waBuckets.reduce((s,n) => s+n, 0);
+  const hasData  = totalFav + totalWa > 0;
+
+  const legend = `
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="width:14px;height:14px;border-radius:4px;background:#A63D5C"></span>
+        <span style="font-size:.82rem;color:var(--muted)">Favourites</span>
+        <b style="font-size:.9rem;color:var(--deep);margin-left:2px">${totalFav}</b>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="width:14px;height:14px;border-radius:4px;background:#25D366"></span>
+        <span style="font-size:.82rem;color:var(--muted)">WhatsApp enquiries</span>
+        <b style="font-size:.9rem;color:var(--deep);margin-left:2px">${totalWa}</b>
+      </div>
+    </div>`;
+
+  if(!hasData){
+    return legend + `<div style="text-align:center;padding:36px 20px;color:var(--muted);font-size:.86rem">
+      <div style="font-size:2rem;margin-bottom:8px">📈</div>
+      No activity yet — the line will appear as customers favourite and enquire about sarees.
+    </div>`;
+  }
+
+  const W = 720, H = 260;
+  const PAD_L = 44, PAD_R = 22, PAD_T = 24, PAD_B = 40;
+  const chartW = W - PAD_L - PAD_R;
+  const chartH = H - PAD_T - PAD_B;
+
+  const maxVal = Math.max(...favBuckets, ...waBuckets, 1);
+  const niceMax = [4,8,12,16,20,24,32,40,60,100].find(c => c >= maxVal) || 100;
+
+  const stepX = chartW / (days - 1);
+  const makePoints = arr => arr.map((v, i) => ({
+    x: PAD_L + i * stepX,
+    y: PAD_T + chartH - (v / niceMax) * chartH,
+    v
+  }));
+  const favPts = makePoints(favBuckets);
+  const waPts  = makePoints(waBuckets);
+
+  const buildPath = pts => pts.map((p,i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ' ' + p.y.toFixed(1)).join(' ');
+  const favLine = buildPath(favPts);
+  const waLine  = buildPath(waPts);
+
+  const gridLines = [0,.25,.5,.75,1].map(f => {
+    const y = PAD_T + chartH * (1 - f);
+    const val = Math.round(niceMax * f);
+    return `<line x1="${PAD_L}" y1="${y}" x2="${PAD_L + chartW}" y2="${y}" stroke="#F0DDE2" stroke-dasharray="3 4"/>
+            <text x="${PAD_L - 8}" y="${y + 4}" text-anchor="end" font-size="10" fill="#8A6B76">${val}</text>`;
+  }).join('');
+
+  const xLabels = labels.map((lbl, i) => {
+    if(i % 2 !== 0 && i !== labels.length - 1) return '';
+    return `<text x="${favPts[i].x}" y="${H - 12}" text-anchor="middle" font-size="10" fill="#8A6B76">${lbl}</text>`;
+  }).join('');
+
+  const favDots = favPts.map(p => p.v > 0
+    ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#A63D5C" stroke-width="2"><title>${p.v} favourite${p.v===1?'':'s'}</title></circle>`
+    : '').join('');
+  const waDots = waPts.map(p => p.v > 0
+    ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#25D366" stroke-width="2"><title>${p.v} WhatsApp enquir${p.v===1?'y':'ies'}</title></circle>`
+    : '').join('');
+
+  return legend + `
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;overflow:visible">
+      ${gridLines}
+      <path d="${favLine}" fill="none" stroke="#A63D5C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="${waLine}"  fill="none" stroke="#25D366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${favDots}
+      ${waDots}
+      ${xLabels}
+    </svg>
+    <p style="margin-top:12px;font-size:.76rem;color:var(--muted);text-align:center">Last 14 days · updates live</p>
+  `;
+}
+
+function renderTimeline(){
+  let items = ACTIVITY.slice();
+
+  if(TIMELINE_FILTER === 'added'){
+    items = items.filter(x => x.event_type === 'favourite_added');
+  } else if(TIMELINE_FILTER === 'removed'){
+    items = items.filter(x => x.event_type === 'favourite_removed');
+  } else if(TIMELINE_FILTER === 'enquiry'){
+    items = items.filter(x => x.event_type === 'whatsapp_enquiry');
+  }
+
+  const countAll     = ACTIVITY.length;
+  const countAdded   = ACTIVITY.filter(x => x.event_type === 'favourite_added').length;
+  const countRemoved = ACTIVITY.filter(x => x.event_type === 'favourite_removed').length;
+  const countWa      = ACTIVITY.filter(x => x.event_type === 'whatsapp_enquiry').length;
+
+  const chips = `
+    <div class="tl-filters">
+      <button class="tl-chip ${TIMELINE_FILTER === 'all' ? 'active' : ''}" data-action="tl-filter" data-filter="all">
+        All activity <span class="cnt">${countAll}</span>
+      </button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'added' ? 'active' : ''}" data-action="tl-filter" data-filter="added">
+        ♥ Added <span class="cnt">${countAdded}</span>
+      </button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'removed' ? 'active' : ''}" data-action="tl-filter" data-filter="removed">
+        ♡ Removed <span class="cnt">${countRemoved}</span>
+      </button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'enquiry' ? 'active' : ''}" data-action="tl-filter" data-filter="enquiry">
+        💬 WhatsApp <span class="cnt">${countWa}</span>
+      </button>
+    </div>`;
+
+  if(items.length === 0){
+    return chips + `<div class="tl-empty">
+      No activity to show for this filter yet.
+    </div>`;
+  }
+
+  const visible = items.slice(0, TIMELINE_SHOWN);
+  const hasMore = items.length > TIMELINE_SHOWN;
+  const remaining = items.length - TIMELINE_SHOWN;
+
+  const list = visible.map(item => {
+    const s = findSaree(item.saree_id);
+    if(!s) return '';
+    let cls, icon, verb;
+    if(item.event_type === 'favourite_added'){ cls = 'add'; icon = '♥'; verb = 'added to favourites'; }
+    else if(item.event_type === 'favourite_removed'){ cls = 'remove'; icon = '♡'; verb = 'removed from favourites'; }
+    else { cls = 'wa'; icon = '💬'; verb = 'sent a WhatsApp enquiry'; }
+    return `
+      <div class="tl-item">
+        <div class="tl-icon ${cls}">${icon}</div>
+        <div class="tl-main">
+          <div class="tl-title">Someone <b>${verb}</b></div>
+          <div class="tl-meta">
+            ${s.code ? `<span class="tl-code">${escapeHtml(s.code)}</span>` : ''}
+            <span>${escapeHtml(s.name)}</span>
+            <span>·</span>
+            <span>${escapeHtml(s.category)}</span>
+          </div>
+        </div>
+        <div class="tl-time">${timeAgo(item.created_at)}</div>
+      </div>`;
+  }).join('');
+
+  const moreBtn = hasMore ? `
+    <div class="tl-more-wrap">
+      <button class="btn btn-ghost btn-sm" data-action="tl-show-more">
+        Show ${Math.min(TIMELINE_PAGE_SIZE, remaining)} more
+        <span class="tl-more-count">${remaining} remaining</span>
+      </button>
+    </div>` : '';
+
+  return chips + `<div class="timeline">${list}</div>` + moreBtn;
 }
 
 /* =========================================================================
@@ -893,6 +1339,10 @@ function EditModal(){
             </div>
           </div>
 
+                    <div class="field full">
+            <label>Saree ID (auto-assigned, read-only)</label>
+            <input type="text" class="code-readonly" value="${escapeHtml(s.code || '—')}" readonly />
+          </div>
           <div class="field"><label>Name *</label><input name="name" type="text" value="${escapeHtml(s.name)}" required /></div>
           <div class="field"><label>Category *</label><input name="category" type="text" value="${escapeHtml(s.category)}" list="catList" required />
             <datalist id="catList">${Array.from(new Set(SAREES.map(x => x.category))).map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
@@ -962,7 +1412,7 @@ function Dashboard(){
       Live · ${escapeHtml(SESSION?.user?.email || '')}
     </div>
     <div class="actions">
-      <a href="https://anchal-saree-shop.vercel.app/" target="_blank" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)">View Store ↗</a>
+      <a href="https://anchal-clothing1.vercel.app/" target="_blank" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)">View Store ↗</a>
       <button class="btn btn-danger btn-sm" data-action="signout">Sign out</button>
     </div>
   </div></div>
@@ -996,22 +1446,38 @@ function Dashboard(){
       </div>
     </div>
 
+    <div class="charts-grid" style="grid-template-columns:1fr">
+      <div class="chart-card">
+        <h2><span class="dot"></span>Customer Activity — Live <span class="live-badge"><span class="pulse-dot"></span>Live</span></h2>
+        <p class="sub">Daily favourites (pink) and WhatsApp enquiries (green) over the last 14 days.</p>
+        ${renderEnquiryTrendChart()}
+      </div>
+    </div>
+
     <div class="charts-grid">
       <div class="chart-card">
-        <h2><span class="dot"></span>Favourites — Live <span class="live-badge"><span class="pulse-dot"></span>Live</span></h2>
-        <p class="sub">Every heart tapped on the public site updates this chart instantly.</p>
+        <h2><span class="dot"></span>Favourites — Leaderboard</h2>
+        <p class="sub">Which sarees are being saved most.</p>
         ${renderFavouritesChart()}
       </div>
       <div class="chart-card">
         <h2><span class="dot"></span>Stock Availability</h2>
-        <p class="sub">Current inventory health across your catalogue.</p>
+        <p class="sub">Current inventory health.</p>
         ${renderStockDonut()}
       </div>
+    </div>
+        <div class="panel">
+      <h2><span class="dot"></span>Activity Timeline</h2>
+      <p class="sub">Live feed of favourites, removals and WhatsApp enquiries — most recent first.</p>
+      ${renderTimeline()}
     </div>
 
         <div class="panel">
       <h2><span class="dot"></span>Manage Inventory</h2>
       <p class="sub">Edit stock or delete sarees, then click Save to apply changes.</p>
+            <div style="margin-bottom:16px">
+        <input type="search" id="inventorySearch" placeholder="Search by name, ID or fabric…" style="width:100%;max-width:340px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;outline:none;font-size:15px;min-height:42px" />
+      </div>
             <div class="save-bar" id="saveBar" style="display:none">
         <span class="msg" id="saveMsg">● 0 unsaved changes</span>
         <div class="actions">
@@ -1032,7 +1498,10 @@ function Dashboard(){
             return `<tr class="${isStagedDelete ? 'staged-delete' : ''}">
               <td><div class="tbl-product">
                                 <div class="tbl-thumb">${s.image_url ? `<img src="${escapeHtml(s.image_url)}" alt="" style="width:100%;height:100%;object-fit:cover" />` : sareeArt(s)}</div>
-                <div class="tbl-info"><strong>${escapeHtml(s.name)}</strong><span>${escapeHtml(s.category)} · ${escapeHtml(s.fabric)}</span></div>
+                                <div class="tbl-info">
+                  <strong>${escapeHtml(s.name)}</strong>
+                  <span>${s.code ? `<span class="code-tag">${escapeHtml(s.code)}</span>` : ''}${escapeHtml(s.category)} · ${escapeHtml(s.fabric)}</span>
+                </div>
               </div></td>
               <td><b>${money(s.price)}</b></td>
               <td><input class="stock-input ${stClass} ${dirty ? 'dirty' : ''}" type="number" min="0" value="${displayStock}" data-action="update-stock" data-id="${s.id}" ${isStagedDelete ? 'disabled' : ''} /></td>
@@ -1496,6 +1965,17 @@ document.addEventListener('click', async e => {
     if(clear) clear.style.display = 'none';
     return;
   }
+      if(a === 'tl-filter'){
+    TIMELINE_FILTER = el.dataset.filter;
+    TIMELINE_SHOWN = TIMELINE_PAGE_SIZE;   // reset pagination when switching filters
+    render();
+    return;
+  }
+  if(a === 'tl-show-more'){
+    TIMELINE_SHOWN += TIMELINE_PAGE_SIZE;
+    render();
+    return;
+  }
 });
 
 document.addEventListener('change', e => {
@@ -1523,6 +2003,15 @@ document.addEventListener('change', e => {
 });
 
 document.addEventListener('input', e => {
+    if(e.target.id === 'inventorySearch'){
+    const q = e.target.value.toLowerCase().trim();
+    const rows = document.querySelectorAll('.table-wrap tbody tr');
+    rows.forEach(row => {
+      const text = (row.textContent || '').toLowerCase();
+      row.style.display = text.includes(q) ? '' : 'none';
+    });
+    return;
+  }
   if(e.target.matches('[data-action="update-stock"]')){
     clearTimeout(e.target._t);
     e.target._t = setTimeout(() => stageStock(e.target.dataset.id, e.target.value), 300);
