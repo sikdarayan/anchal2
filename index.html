@@ -47,11 +47,10 @@ input,select,textarea{font-size:16px}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(74,222,128,.2)}50%{box-shadow:0 0 0 8px rgba(74,222,128,.05)}}
 .topbar .brand .logo-mini{width:34px;height:34px;flex:0 0 34px}
 .topbar .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.topbar .email{font-size:.8rem;color:#C6A3B1;text-transform:none;letter-spacing:0;font-weight:400}
 
 .wrap{padding:36px 0 80px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px;margin-bottom:22px}
-.panel h2{font-size:1.08rem;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.panel h2{font-size:1.08rem;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .panel h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:0 0 8px}
 .panel .sub{color:var(--muted);font-size:.84rem;margin-bottom:22px}
 
@@ -107,12 +106,130 @@ tbody td:last-child{border-right:1px solid var(--line);border-top-right-radius:1
 .stock-input:focus{border-color:var(--rose)}
 .stock-input.low{border-color:var(--amber);background:#FFF8EE}
 .stock-input.out{border-color:var(--red);background:#FFF0F2;color:var(--red)}
+.stock-input.dirty{border-color:var(--rose);background:#FFF5F8;box-shadow:0 0 0 3px rgba(166,61,92,.08)}
 .fav-cell{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--deep)}
 .fav-cell.zero{color:var(--muted);font-weight:400}
 .fav-cell .heart-ic{color:var(--pink)}
 .row-actions{display:flex;gap:6px;justify-content:flex-end}
 .icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--muted);display:grid;place-items:center;cursor:pointer}
 .icon-btn:hover{border-color:var(--red);color:var(--red);background:#FFF5F5}
+.icon-btn.edit:hover{border-color:var(--rose);color:var(--rose);background:var(--blush)}
+.row-undo{background:transparent;border:1px solid var(--line);color:var(--rose);border-radius:8px;padding:6px 12px;font-size:.72rem;font-weight:500;cursor:pointer;font-family:inherit;transition:.2s}
+.row-undo:hover{background:var(--blush);border-color:var(--rose)}
+tbody tr.staged-delete{background:#FFF0F2}
+tbody tr.staged-delete td{opacity:.5}
+tbody tr.staged-delete .tbl-info strong{text-decoration:line-through}
+
+/* ====== INVENTORY COUNT BADGE ====== */
+.inv-count{
+  font-size:.68rem;
+  font-weight:600;
+  color:var(--muted);
+  background:var(--blush);
+  padding:3px 10px;
+  border-radius:999px;
+  letter-spacing:.02em;
+  margin-left:4px;
+}
+
+/* ====== SORTABLE HEADERS ====== */
+thead th.sortable{
+  cursor:pointer;
+  user-select:none;
+  transition:color .15s;
+  white-space:nowrap;
+}
+thead th.sortable:hover{color:var(--rose)}
+thead th.sortable.active{color:var(--rose)}
+.sort-icon{
+  display:inline-block;
+  font-size:.72em;
+  opacity:.35;
+  margin-left:5px;
+  transition:opacity .15s;
+}
+thead th.sortable:hover .sort-icon,
+thead th.sortable.active .sort-icon{opacity:1}
+
+/* ====== INVENTORY SHOW MORE ====== */
+.inv-more-wrap{
+  display:flex;
+  justify-content:center;
+  padding:22px 0 6px;
+  margin-top:8px;
+  border-top:1px solid var(--line);
+}
+.inv-more-wrap .btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 24px;
+  font-size:.84rem;
+}
+.inv-more-count{
+  font-size:.7rem;
+  font-weight:500;
+  color:var(--muted);
+  background:var(--blush);
+  padding:3px 9px;
+  border-radius:999px;
+  letter-spacing:.02em;
+}
+.inv-more-wrap .btn:hover .inv-more-count{background:var(--blush-2);color:var(--rose)}
+
+/* ====== INVENTORY EMPTY STATE ====== */
+.inv-empty{
+  display:none;
+  text-align:center;
+  padding:56px 24px 60px;
+  color:var(--muted);
+}
+.inv-empty.show{display:block}
+.inv-empty .empty-illustration{
+  width:180px;
+  height:140px;
+  margin:0 auto 20px;
+  display:block;
+}
+.inv-empty .empty-title{
+  font-size:1.05rem;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:6px;
+  letter-spacing:-.01em;
+}
+.inv-empty .empty-sub{
+  font-size:.86rem;
+  color:var(--muted);
+  line-height:1.55;
+  max-width:340px;
+  margin:0 auto 20px;
+}
+.inv-empty .empty-reset{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--rose);
+  font-size:.82rem;
+  font-weight:500;
+  font-family:inherit;
+  cursor:pointer;
+  transition:.2s;
+}
+.inv-empty .empty-reset:hover{
+  border-color:var(--rose);
+  background:var(--blush);
+  transform:translateY(-1px);
+}
+
+/* ====== SAVE BAR ====== */
+.save-bar{display:flex;align-items:center;gap:12px;background:#FFF8EE;border:1px solid #F0D9B5;border-radius:12px;padding:12px 16px;margin-bottom:16px;flex-wrap:wrap}
+.save-bar .msg{color:#8C6A2E;font-size:.86rem;font-weight:500;flex:1;min-width:180px}
+.save-bar .actions{display:flex;gap:8px;flex-wrap:wrap}
 
 .add-form{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
 .add-form .field{margin-bottom:16px}
@@ -127,7 +244,246 @@ tbody td:last-child{border-right:1px solid var(--line);border-top-right-radius:1
 .palette-swatch.active{border-color:var(--rose);transform:scale(1.06)}
 .palette-swatch.active::before{content:'✓';position:absolute;bottom:-3px;right:-3px;width:18px;height:18px;border-radius:50%;background:var(--rose);color:#fff;font-size:.6rem;font-weight:700;display:grid;place-items:center;z-index:2;border:2px solid #fff}
 
-/* AUTH */
+/* ====== PRODUCT TYPE SELECTOR (Add form) ====== */
+.type-selector{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.type-btn{
+  padding:22px 16px;
+  border-radius:16px;
+  border:2px solid var(--line);
+  background:#fff;
+  font-size:1.05rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--muted);
+  cursor:pointer;
+  font-family:inherit;
+  position:relative;
+  transition:all .25s cubic-bezier(.2,.7,.3,1);
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.type-btn:hover{
+  border-color:var(--blush-2);
+  color:var(--rose);
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px -14px rgba(74,20,40,.22);
+}
+.type-btn.active{
+  border-color:var(--rose);
+  background:linear-gradient(135deg,#FFF5F8,#FCE9EF);
+  color:var(--rose);
+  box-shadow:0 10px 26px -14px rgba(166,61,92,.4);
+}
+
+/* ====== LOCKED PRODUCT TYPE (Edit modal) ====== */
+.type-locked{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 20px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#FFF5F8,#FCE9EF);
+  border:1.5px solid var(--blush-2);
+  color:var(--rose);
+  font-size:1.05rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  min-height:60px;
+}
+.type-locked .lock-icon{
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+  opacity:.55;
+  color:var(--rose);
+}
+.type-locked .lbl{flex:1}
+.type-locked .tag-readonly{
+  font-size:.6rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:#fff;
+  border:1px solid var(--line);
+  padding:3px 9px;
+  border-radius:999px;
+}
+.type-locked-hint{
+  font-size:.72rem;
+  color:var(--muted);
+  margin-top:8px;
+  line-height:1.5;
+}
+
+/* ====== SIZE CHIPS — CLEAN PILLS ====== */
+.size-chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.size-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 24px;
+  height:46px;
+  min-width:62px;
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  font-size:.9rem;
+  font-weight:500;
+  color:var(--ink);
+  cursor:pointer;
+  transition:all .2s cubic-bezier(.2,.7,.3,1);
+  user-select:none;
+  letter-spacing:.04em;
+  font-family:inherit;
+}
+.size-chip:hover{
+  border-color:var(--rose);
+  color:var(--rose);
+  transform:translateY(-1px);
+}
+.size-chip input{display:none}
+.size-chip.active{
+  background:var(--rose);
+  border-color:var(--rose);
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 6px 16px -6px rgba(166,61,92,.55);
+}
+.size-chip.active:hover{background:var(--rose-dark);border-color:var(--rose-dark)}
+
+/* ====== MULTI-IMAGE UPLOADER ====== */
+.image-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:14px;
+  margin-top:12px;
+}
+.image-tile{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .2s, border-color .2s;
+}
+.image-tile:hover{box-shadow:0 6px 20px -10px rgba(74,20,40,.3)}
+.image-tile .thumb{
+  aspect-ratio:3/4;
+  background:var(--blush);
+  overflow:hidden;
+  position:relative;
+}
+.image-tile .thumb img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.image-tile .thumb .remove{
+  position:absolute;top:8px;right:8px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.96);color:var(--red);
+  border:0;cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 2px 8px -2px rgba(0,0,0,.35);
+  font-size:1rem;line-height:1;font-family:inherit;
+  transition:.15s;
+  z-index:2;
+}
+.image-tile .thumb .remove:hover{background:var(--red);color:#fff;transform:scale(1.08)}
+.image-tile .thumb .primary-tag{
+  position:absolute;top:8px;left:8px;
+  background:var(--rose);color:#fff;
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;
+  padding:4px 9px;border-radius:999px;
+  text-transform:uppercase;z-index:2;
+  box-shadow:0 2px 8px -2px rgba(166,61,92,.5);
+}
+.image-tile .meta{
+  padding:10px 12px 12px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.image-tile .color-row{display:flex;align-items:center;gap:9px}
+.image-tile .color-dot{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid #fff;
+  box-shadow:0 0 0 1.5px var(--line);
+  flex:0 0 22px;
+}
+.image-tile .color-hex{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.72rem;color:var(--muted);
+  letter-spacing:.04em;font-weight:500;
+}
+.image-tile .color-name{
+  width:100%;padding:8px 10px;border-radius:8px;
+  border:1px solid var(--line);background:var(--cream);
+  outline:none;font-size:.8rem;font-family:inherit;
+  min-height:36px;transition:.15s;
+}
+.image-tile .color-name:focus{border-color:var(--rose);background:#fff}
+.image-tile.add-tile{
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px dashed var(--line);
+  cursor:pointer;aspect-ratio:3/4;
+  color:var(--rose);font-size:.82rem;font-weight:500;
+  text-align:center;padding:18px;
+  background:#fff;transition:.2s;
+}
+.image-tile.add-tile:hover{
+  border-color:var(--rose);background:#FFF5F8;
+  transform:scale(1.02);
+}
+.image-tile.add-tile .plus{
+  font-size:2.4rem;line-height:1;margin-bottom:8px;
+  color:var(--rose);font-weight:300;
+}
+.image-tile.add-tile .lbl-main{font-weight:600;margin-bottom:4px}
+.image-tile.add-tile .lbl-sub{font-size:.68rem;color:var(--muted);font-weight:400;line-height:1.35}
+
+.image-hint{
+  font-size:.74rem;color:var(--muted);
+  margin-top:6px;line-height:1.55;
+}
+.extracting{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:rgba(255,255,255,.9);
+  font-size:.72rem;color:var(--rose);font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;
+  z-index:1;
+}
+.extracting::before{
+  content:'';
+  width:18px;height:18px;border-radius:50%;
+  border:2px solid var(--blush-2);border-top-color:var(--rose);
+  animation:spin 0.8s linear infinite;
+  position:absolute;top:calc(50% - 26px);left:50%;margin-left:-9px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.color-stack{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.color-stack .dot{
+  width:16px;height:16px;border-radius:50%;
+  border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line);
+}
+.color-stack .more{
+  font-size:.68rem;color:var(--muted);
+  background:var(--blush);padding:1px 6px;border-radius:999px;
+  font-weight:500;
+}
+
+/* ====== AUTH ====== */
 .auth-wrap{min-height:100vh;display:grid;place-items:center;padding:40px 20px;background:radial-gradient(circle at 20% 30%,#FDEAF1,#F7F3F5 70%)}
 .auth-card{max-width:460px;width:100%;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:38px 36px;box-shadow:var(--shadow)}
 .auth-logo{width:88px;height:88px;margin:0 auto 18px;border-radius:50%}
@@ -137,8 +493,6 @@ tbody td:last-child{border-right:1px solid var(--line);border-top-right-radius:1
 .auth-tab{flex:1;padding:10px;border:0;background:transparent;border-radius:999px;font-size:.82rem;font-weight:500;color:var(--muted);cursor:pointer;transition:.2s;font-family:inherit}
 .auth-tab.active{background:#fff;color:var(--rose);box-shadow:0 2px 8px -4px rgba(74,20,40,.2)}
 .field{margin-bottom:16px}
-.auth-form button[type="submit"],
-form[data-form="change-password"] button[type="submit"]{margin-top:12px}
 .auth-form button[type="submit"]{margin-top:8px}
 .auth-note{font-size:.76rem;color:var(--muted);text-align:center;margin-top:18px;line-height:1.55}
 .auth-note a{color:var(--rose);font-weight:500;cursor:pointer}
@@ -153,318 +507,7 @@ form[data-form="change-password"] button[type="submit"]{margin-top:12px}
 .toast.success{background:var(--green)}
 .toast.error{background:var(--red)}
 
-/* ============================================================
-   TABLET LANDSCAPE — 1024px and below
-   ============================================================ */
-@media (max-width:1024px){
-  .container{padding:0 28px}
-  .wrap{padding:28px 0 60px}
-  .stats{grid-template-columns:repeat(2,1fr);gap:14px}
-  .charts-grid{grid-template-columns:1fr;gap:18px}
-  .chart-card{padding:22px 24px}
-  .panel{padding:24px 26px}
-  .topbar .inner{gap:12px}
-  table{min-width:760px}
-  thead th{padding:8px 12px}
-  tbody td{padding:12px}
-}
-
-/* ============================================================
-   TABLET PORTRAIT — 900px and below
-   ============================================================ */
-@media (max-width:900px){
-  .container{padding:0 24px}
-  .wrap{padding:24px 0 56px}
-
-  /* Topbar stacks brand + actions */
-  .topbar .inner{flex-direction:column;align-items:stretch;gap:14px}
-  .topbar .brand{white-space:nowrap;overflow:hidden;min-width:0}
-  .topbar .brand .logo-mini,
-  .topbar .brand .dot{flex-shrink:0}
-  .topbar .actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .topbar .actions .btn{width:100%}
-
-  .panel{padding:22px 22px}
-  .chart-card{padding:20px 20px}
-
-  /* Leaderboard rows: bar drops to its own line */
-  .lb-row{grid-template-columns:1fr auto;gap:10px;padding:10px 0}
-  .lb-bar-wrap{grid-column:1/-1;order:3;margin-top:4px}
-  .lb-name{white-space:normal;font-size:.86rem;line-height:1.35}
-
-  /* Form stacks to 1 column */
-  .add-form{grid-template-columns:1fr;gap:0}
-
-  /* Table gets slightly tighter */
-  table{min-width:720px}
-  thead th{font-size:.65rem;padding:7px 10px}
-  tbody td{padding:12px 10px;font-size:.83rem}
-  .tbl-thumb{width:40px;height:52px;flex:0 0 40px}
-  .tbl-product{min-width:180px;gap:10px}
-
-  /* Touch-friendly controls */
-  .icon-btn{width:44px;height:44px;border-radius:12px}
-  .stock-input{width:70px;min-height:44px;font-size:16px}
-  .btn-sm{min-height:44px}
-}
-
-/* ============================================================
-   LARGE PHONE / SMALL TABLET — 640px and below
-   ============================================================ */
-@media (max-width:640px){
-  .container{padding:0 18px}
-  .wrap{padding:20px 0 48px}
-
-  /* Stats collapse to single column */
-  .stats{grid-template-columns:1fr;gap:12px;margin-bottom:18px}
-  .stat-card{padding:18px 20px}
-  .stat-card .lbl{font-size:.68rem}
-  .stat-card .val{font-size:1.55rem}
-  .stat-card .subl{font-size:.74rem}
-  .stat-card .ic{width:34px;height:34px;top:16px;right:16px;border-radius:10px;font-size:.95rem}
-
-  .panel{padding:20px 18px;margin-bottom:18px}
-  .panel h2{font-size:1rem}
-  .panel .sub{font-size:.8rem;margin-bottom:16px}
-
-  .chart-card{padding:18px 16px}
-  .chart-card h2{font-size:.98rem;gap:8px}
-  .chart-card .sub{font-size:.78rem;margin-bottom:14px}
-  .live-badge{font-size:.62rem;padding:3px 9px}
-  .live-badge .pulse-dot{width:6px;height:6px;flex:0 0 6px}
-
-  /* Topbar */
-  .topbar{padding:12px 0;padding-top:calc(12px + env(safe-area-inset-top,0))}
-  .topbar .brand{font-size:.78rem;gap:10px}
-  .topbar .brand .logo-mini{width:30px;height:30px;flex:0 0 30px}
-  .topbar .brand .dot{width:8px;height:8px;flex:0 0 8px}
-  .topbar .actions{gap:8px}
-  .topbar .actions .btn{font-size:.78rem;padding:10px 14px;min-height:42px}
-
-  /* Auth screens */
-  .auth-wrap{padding:24px 16px}
-  .auth-card{padding:28px 22px}
-  .auth-logo{width:76px;height:76px;margin-bottom:14px}
-  .auth-card h1{font-size:1.22rem}
-  .auth-card > p.sub{font-size:.82rem;margin-bottom:20px}
-  .auth-tabs{padding:4px;margin-bottom:18px}
-  .auth-tab{padding:10px;font-size:.8rem}
-  .auth-note{font-size:.74rem}
-
-  /* Table — scrolls horizontally, tighter cells */
-  table{min-width:660px}
-  thead th{font-size:.6rem;padding:6px 9px;letter-spacing:.1em}
-  tbody td{padding:11px 9px;font-size:.8rem}
-  .tbl-product{min-width:160px;gap:9px}
-  .tbl-thumb{width:36px;height:46px;flex:0 0 36px;border-radius:6px}
-  .tbl-info strong{font-size:.8rem}
-  .tbl-info span{font-size:.68rem}
-  .stock-input{width:62px;min-height:42px;padding:8px;font-size:15px}
-  .icon-btn{width:42px;height:42px}
-  .fav-cell{font-size:.82rem}
-
-  /* Buttons */
-  .btn{padding:12px 20px;font-size:.85rem}
-  .btn-sm{padding:10px 16px;font-size:.78rem;min-height:42px}
-
-  /* Form fields */
-  .add-form .field{margin-bottom:14px}
-  .field label{font-size:.68rem}
-  .field input,.field textarea,.field select{padding:12px 14px;font-size:16px;min-height:42px}
-
-  /* Palette picker */
-  .palette-picker{gap:8px}
-  .palette-swatch{width:42px;height:42px}
-
-  /* Leaderboard */
-  .lb-row{padding:9px 0;gap:8px}
-  .lb-count{font-size:.82rem;min-width:36px}
-  .lb-name{font-size:.82rem}
-
-  /* Chart legend */
-  .legend{gap:8px;margin-top:12px}
-  .legend-row{font-size:.8rem;gap:8px}
-  .legend-dot{width:11px;height:11px;flex:0 0 11px}
-
-  .untouched-pill{font-size:.6rem;padding:3px 8px}
-}
-
-/* ============================================================
-   STANDARD PHONE — 480px and below
-   ============================================================ */
-@media (max-width:480px){
-  .container{padding:0 14px}
-  .wrap{padding:16px 0 42px}
-
-  .topbar{padding:10px 0;padding-top:calc(10px + env(safe-area-inset-top,0))}
-  .topbar .brand{font-size:.72rem;letter-spacing:.04em;gap:9px}
-  .topbar .brand .logo-mini{width:28px;height:28px;flex:0 0 28px}
-  .topbar .actions .btn{font-size:.74rem;padding:9px 12px;min-height:40px}
-
-  .stat-card{padding:16px 18px}
-  .stat-card .val{font-size:1.42rem}
-  .stat-card .ic{width:32px;height:32px;top:14px;right:14px;border-radius:9px;font-size:.9rem}
-
-  .panel{padding:18px 14px}
-  .panel h2{font-size:.96rem}
-  .panel .sub{font-size:.76rem}
-
-  .chart-card{padding:16px 14px}
-  .chart-card h2{font-size:.92rem}
-  .chart-card h2 .dot{width:7px;height:7px;flex:0 0 7px}
-
-  /* Auth */
-  .auth-card{padding:24px 16px}
-  .auth-logo{width:70px;height:70px;margin-bottom:12px}
-  .auth-card h1{font-size:1.12rem}
-  .auth-card > p.sub{font-size:.78rem}
-  .auth-tab{font-size:.76rem;padding:9px}
-  .form-msg{font-size:.78rem;padding:10px 12px}
-
-  /* Table */
-  table{min-width:600px}
-  thead th{font-size:.56rem;padding:6px 8px}
-  tbody td{padding:10px 8px;font-size:.78rem}
-  .tbl-product{min-width:150px;gap:8px}
-  .tbl-thumb{width:34px;height:44px;flex:0 0 34px}
-  .tbl-info strong{font-size:.78rem;line-height:1.3}
-  .tbl-info span{font-size:.64rem}
-  .stock-input{width:58px;min-height:42px;font-size:15px}
-  .icon-btn{width:42px;height:42px}
-
-  /* Buttons */
-  .btn{padding:11px 18px;font-size:.83rem;min-height:42px}
-  .btn-sm{padding:9px 14px;font-size:.74rem;min-height:40px}
-
-  /* Palette */
-  .palette-picker{gap:7px}
-  .palette-swatch{width:40px;height:40px}
-
-  .lb-name{font-size:.8rem}
-  .lb-count{font-size:.8rem;min-width:32px}
-  .legend-row{font-size:.76rem}
-
-  .untouched-pill{font-size:.58rem;padding:2px 7px}
-}
-
-/* ============================================================
-   SMALL PHONE — 380px and below
-   ============================================================ */
-@media (max-width:380px){
-  .container{padding:0 12px}
-  .wrap{padding:14px 0 36px}
-
-  .topbar .brand{font-size:.68rem}
-  .topbar .brand .logo-mini{width:26px;height:26px;flex:0 0 26px}
-  .topbar .brand .dot{width:7px;height:7px;flex:0 0 7px}
-  .topbar .actions .btn{font-size:.72rem;padding:8px 11px;min-height:38px}
-
-  .stat-card{padding:14px 16px}
-  .stat-card .val{font-size:1.3rem}
-  .stat-card .lbl{font-size:.64rem}
-  .stat-card .subl{font-size:.7rem}
-  .stat-card .ic{width:30px;height:30px;top:12px;right:12px;border-radius:8px;font-size:.85rem}
-
-  .panel{padding:16px 12px}
-  .panel h2{font-size:.9rem}
-  .chart-card{padding:14px 12px}
-  .chart-card h2{font-size:.88rem}
-
-  .auth-card{padding:22px 14px}
-  .auth-logo{width:64px;height:64px;margin-bottom:10px}
-  .auth-card h1{font-size:1.05rem}
-  .auth-card > p.sub{font-size:.74rem;margin-bottom:16px}
-  .auth-tabs{padding:3px}
-  .auth-tab{font-size:.72rem;padding:8px}
-
-  table{min-width:540px}
-  thead th{font-size:.54rem;padding:5px 7px}
-  tbody td{padding:9px 7px;font-size:.74rem}
-  .tbl-product{min-width:140px;gap:7px}
-  .tbl-thumb{width:30px;height:40px;flex:0 0 30px}
-  .tbl-info strong{font-size:.74rem}
-  .tbl-info span{font-size:.6rem}
-  .stock-input{width:54px;font-size:14px;padding:7px 5px}
-  .icon-btn{width:40px;height:40px}
-
-  .btn{padding:10px 16px;font-size:.8rem}
-  .btn-sm{padding:8px 12px;font-size:.72rem}
-
-  .palette-swatch{width:38px;height:38px}
-
-  .lb-name{font-size:.76rem}
-  .legend-row{font-size:.72rem}
-}
-
-/* ============================================================
-   LANDSCAPE PHONE (short height) — prevents excessive scroll
-   ============================================================ */
-@media (max-height:520px) and (orientation:landscape){
-  .wrap{padding:16px 0 30px}
-  .stat-card .val{font-size:1.3rem}
-  .stat-card{padding:14px 16px}
-  .chart-card{padding:14px 16px}
-  .auth-wrap{padding:16px}
-  .auth-card{padding:20px 24px}
-  .auth-logo{width:60px;height:60px;margin-bottom:10px}
-}
-
-/* ============================================================
-   SAFE AREA — notch / home indicator support
-   ============================================================ */
-@supports (padding:env(safe-area-inset-left)){
-  .topbar{
-    padding-left:env(safe-area-inset-left,0);
-    padding-right:env(safe-area-inset-right,0);
-  }
-  .wrap{
-    padding-left:env(safe-area-inset-left,0);
-    padding-right:env(safe-area-inset-right,0);
-    padding-bottom:calc(42px + env(safe-area-inset-bottom,0));
-  }
-}
-/* ============ SAVE BAR & PENDING CHANGES ============ */
-.save-bar{display:flex;align-items:center;gap:12px;background:#FFF8EE;border:1px solid #F0D9B5;border-radius:12px;padding:12px 16px;margin-bottom:16px;flex-wrap:wrap}
-.save-bar .msg{color:#8C6A2E;font-size:.86rem;font-weight:500;flex:1;min-width:180px}
-.save-bar .actions{display:flex;gap:8px;flex-wrap:wrap}
-.stock-input.dirty{border-color:var(--rose);background:#FFF5F8;box-shadow:0 0 0 3px rgba(166,61,92,.08)}
-tbody tr.staged-delete{background:#FFF0F2}
-tbody tr.staged-delete td{opacity:.5}
-tbody tr.staged-delete .tbl-info strong{text-decoration:line-through}
-.row-undo{background:transparent;border:1px solid var(--line);color:var(--rose);border-radius:8px;padding:6px 12px;font-size:.72rem;font-weight:500;cursor:pointer;font-family:inherit;transition:.2s}
-.row-undo:hover{background:var(--blush);border-color:var(--rose)}
-@media (max-width:640px){
-  .save-bar{padding:10px 12px}
-  .save-bar .msg{font-size:.8rem;min-width:auto}
-  .save-bar .actions{width:100%}
-  .save-bar .actions .btn{flex:1}
-}
-/* ============ PHOTO + EDIT MODAL ============ */
-.photo-field{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.photo-preview{
-  width:120px;height:150px;border-radius:12px;overflow:hidden;
-  background:var(--blush);flex:0 0 120px;border:1px solid var(--line);
-  display:grid;place-items:center;color:var(--muted);font-size:.72rem;text-align:center;padding:8px;
-}
-.photo-preview img{width:100%;height:100%;object-fit:cover}
-.photo-preview svg{width:100%;height:100%}
-.photo-actions{flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px}
-.photo-actions label.file-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 20px;border-radius:999px;border:1px dashed var(--line);
-  background:#fff;color:var(--rose);font-size:.85rem;font-weight:500;cursor:pointer;
-  transition:.2s;min-height:var(--tap);
-}
-.photo-actions label.file-btn:hover{border-color:var(--rose);background:var(--blush)}
-.photo-actions .hint{font-size:.72rem;color:var(--muted);line-height:1.4}
-.photo-actions .remove-photo{
-  background:none;border:1px solid var(--line);color:var(--red);
-  padding:10px 18px;border-radius:999px;font-size:.78rem;cursor:pointer;font-family:inherit;
-  min-height:40px;align-self:flex-start;
-}
-.photo-actions .remove-photo:hover{background:#FFF5F5;border-color:var(--red)}
-
-/* Edit modal */
+/* ====== MODAL ====== */
 .modal-overlay{
   position:fixed;inset:0;background:rgba(43,15,26,.55);
   backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
@@ -472,7 +515,7 @@ tbody tr.staged-delete .tbl-info strong{text-decoration:line-through}
   overflow-y:auto;-webkit-overflow-scrolling:touch;
 }
 .modal{
-  background:#fff;border-radius:var(--radius);width:100%;max-width:820px;
+  background:#fff;border-radius:var(--radius);width:100%;max-width:880px;
   box-shadow:var(--shadow-lg);max-height:92vh;display:flex;flex-direction:column;
   margin:auto;
 }
@@ -483,10 +526,7 @@ tbody tr.staged-delete .tbl-info strong{text-decoration:line-through}
 }
 .modal-head h2{font-size:1.15rem;display:flex;align-items:center;gap:10px}
 .modal-head h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:0 0 8px}
-.modal-close{
-  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;
-  color:var(--muted);cursor:pointer;display:grid;place-items:center;flex:0 0 40px;
-}
+.modal-close{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;display:grid;place-items:center;flex:0 0 40px}
 .modal-close:hover{border-color:var(--red);color:var(--red)}
 .modal-body{padding:24px 28px;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1}
 .modal-foot{
@@ -494,290 +534,183 @@ tbody tr.staged-delete .tbl-info strong{text-decoration:line-through}
   display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;
   position:sticky;bottom:0;background:#fff;border-radius:0 0 var(--radius) var(--radius);
 }
+.code-readonly{background:var(--blush) !important;font-family:ui-monospace,monospace !important;font-weight:600 !important;color:var(--rose) !important;cursor:not-allowed;letter-spacing:.04em}
 
-/* Table edit button */
-.row-actions .icon-btn.edit:hover{border-color:var(--rose);color:var(--rose);background:var(--blush)}
-
+@media (max-width:1024px){
+  .container{padding:0 28px}
+  .wrap{padding:28px 0 60px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:14px}
+  .charts-grid{grid-template-columns:1fr;gap:18px}
+  .panel{padding:24px 26px}
+  .chart-card{padding:22px 24px}
+}
+@media (max-width:900px){
+  .container{padding:0 24px}
+  .wrap{padding:24px 0 56px}
+  .topbar .inner{flex-direction:column;align-items:stretch;gap:14px}
+  .topbar .actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .topbar .actions .btn{width:100%}
+  .panel{padding:22px 22px}
+  .chart-card{padding:20px 20px}
+  .lb-row{grid-template-columns:1fr auto;gap:10px;padding:10px 0}
+  .lb-bar-wrap{grid-column:1/-1;order:3;margin-top:4px}
+  .lb-name{white-space:normal;font-size:.86rem;line-height:1.35}
+  .add-form{grid-template-columns:1fr;gap:0}
+  table{min-width:720px}
+  thead th{font-size:.65rem;padding:7px 10px}
+  tbody td{padding:12px 10px;font-size:.83rem}
+  .tbl-thumb{width:40px;height:52px;flex:0 0 40px}
+  .tbl-product{min-width:180px;gap:10px}
+  .icon-btn{width:44px;height:44px;border-radius:12px}
+  .stock-input{width:70px;min-height:44px;font-size:16px}
+  .btn-sm{min-height:44px}
+}
 @media (max-width:640px){
+  .container{padding:0 18px}
+  .wrap{padding:20px 0 48px}
+  .stats{grid-template-columns:1fr;gap:12px;margin-bottom:18px}
+  .stat-card{padding:18px 20px}
+  .stat-card .val{font-size:1.55rem}
+  .panel{padding:20px 18px;margin-bottom:18px}
+  .chart-card{padding:18px 16px}
+  .image-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .image-tile .meta{padding:8px 9px 10px;gap:6px}
+  .image-tile .color-name{font-size:.76rem;padding:7px 9px;min-height:34px}
+  .image-tile .color-hex{font-size:.68rem}
+  .image-tile .color-dot{width:20px;height:20px;flex:0 0 20px}
   .modal-overlay{padding:0}
   .modal{max-height:100vh;border-radius:0;height:100%}
   .modal-head{padding:18px 18px;border-radius:0}
   .modal-body{padding:18px 18px}
   .modal-foot{padding:14px 18px;border-radius:0}
   .modal-foot .btn{flex:1}
-  .photo-preview{width:100px;height:125px;flex:0 0 100px}
+  .type-selector{grid-template-columns:repeat(3,1fr);gap:8px}
+  .type-btn{padding:18px 8px;font-size:.92rem;min-height:60px;border-radius:14px}
+  .type-locked{padding:14px 16px;font-size:.98rem;min-height:56px;gap:10px}
+  .type-locked .lock-icon{width:18px;height:18px;flex:0 0 18px}
+  .type-locked .tag-readonly{font-size:.55rem;padding:2px 7px}
+  .size-chip{padding:0 18px;height:42px;min-width:54px;font-size:.86rem}
+  .save-bar{padding:10px 12px}
+  .save-bar .msg{font-size:.8rem;min-width:auto}
+  .save-bar .actions{width:100%}
+  .save-bar .actions .btn{flex:1}
+  .inv-empty{padding:40px 18px 46px}
+  .inv-empty .empty-illustration{width:150px;height:116px;margin-bottom:16px}
+  .inv-empty .empty-title{font-size:.96rem}
+  .inv-empty .empty-sub{font-size:.8rem;margin-bottom:16px}
+  .inv-more-wrap{padding:16px 0 4px}
+  .inv-more-wrap .btn{width:100%;justify-content:center;padding:12px 18px;font-size:.82rem}
 }
-
-/* ============================================================
-   AUTO-FIT UPLOADED PHOTOS TO ANY CARD SIZE
-   Photos of any dimensions are cropped/centred to fill the frame.
-   ============================================================ */
-
-/* All image containers — force a fixed aspect ratio */
-.p-media,
-.pd-media,
-.fav-card .p-media,
-.tbl-thumb,
-.photo-preview{
-  position:relative;
-  overflow:hidden;
-  background:var(--blush);
+@media (max-width:480px){
+  .container{padding:0 14px}
+  .topbar .actions .btn{font-size:.74rem;padding:9px 12px;min-height:40px}
+  .image-grid{grid-template-columns:repeat(2,1fr)}
+  table{min-width:600px}
+  thead th{font-size:.56rem;padding:6px 8px}
+  tbody td{padding:10px 8px;font-size:.78rem}
+  .tbl-thumb{width:34px;height:44px;flex:0 0 34px}
+  .stock-input{width:58px;min-height:42px;font-size:15px}
+  .type-btn{padding:16px 6px;font-size:.86rem;min-height:56px}
+  .size-chip{padding:0 16px;height:40px;min-width:50px;font-size:.82rem}
 }
-
-/* Product card — 3:4 portrait */
-.p-media{aspect-ratio:3/4}
-
-/* Product detail page — 3:4 arch */
-.pd-media{aspect-ratio:3/4}
-
-/* Favourites card */
-.fav-card .p-media{aspect-ratio:3/4}
-
-/* Table thumbnails in admin */
-.tbl-thumb{aspect-ratio:3/4}
-
-/* Any <img> inside a media frame — auto-fill */
-.p-media img,
-.pd-media img,
-.fav-card .p-media img,
-.tbl-thumb img,
-.photo-preview img,
-#addPhotoPreview img,
-#editPhotoPreview img,
-img.saree-art{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover !important;
-  object-position:center !important;
-  background:var(--blush);
-}
-
-/* SVG fallback art — same sizing */
-.p-media svg,
-.pd-media svg,
-.fav-card .p-media svg,
-.tbl-thumb svg,
-.saree-art svg,
-svg.saree-art{
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.code-tag{
-  display:inline-block;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:.66rem;
-  font-weight:600;
-  color:var(--rose);
-  background:var(--blush);
-  padding:2px 7px;
-  border-radius:6px;
-  letter-spacing:.03em;
-  margin-right:6px;
-  vertical-align:middle;
-}
-.code-readonly{
-  background:var(--blush) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;
-  font-weight:600 !important;
-  color:var(--rose) !important;
-  cursor:not-allowed;
-  letter-spacing:.04em;
+@supports (padding:env(safe-area-inset-left)){
+  .topbar{padding-left:env(safe-area-inset-left,0);padding-right:env(safe-area-inset-right,0)}
+  .wrap{padding-left:env(safe-area-inset-left,0);padding-right:env(safe-area-inset-right,0);padding-bottom:calc(42px + env(safe-area-inset-bottom,0))}
 }
 
 /* ============ ACTIVITY TIMELINE ============ */
-.tl-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tl-filters{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;
+  padding-bottom:18px;border-bottom:1px solid var(--line);
+}
 .tl-chip{
-  padding:8px 16px;border-radius:999px;border:1px solid var(--line);
+  padding:9px 16px;border-radius:999px;border:1px solid var(--line);
   background:#fff;font-size:.8rem;color:var(--muted);cursor:pointer;
   transition:.2s;font-family:inherit;min-height:38px;
-  display:inline-flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;gap:8px;font-weight:500;
 }
-.tl-chip:hover{border-color:var(--rose);color:var(--rose)}
+.tl-chip:hover{border-color:var(--rose);color:var(--rose);background:#FFF8FA}
 .tl-chip.active{background:var(--rose);border-color:var(--rose);color:#fff}
 .tl-chip .cnt{
-  background:rgba(0,0,0,.08);padding:1px 7px;border-radius:999px;
-  font-size:.7rem;font-weight:600;
+  background:rgba(0,0,0,.07);padding:2px 8px;border-radius:999px;
+  font-size:.68rem;font-weight:600;min-width:20px;text-align:center;
 }
-.tl-chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
+.tl-chip.active .cnt{background:rgba(255,255,255,.28);color:#fff}
 
-.timeline{position:relative;padding-left:34px}
-.timeline::before{
-  content:'';position:absolute;left:15px;top:8px;bottom:8px;width:2px;
-  background:linear-gradient(180deg,var(--line),transparent);
+.tl-list{position:relative;padding-left:46px}
+.tl-list::before{
+  content:'';position:absolute;left:17px;top:14px;bottom:14px;
+  width:2px;background:linear-gradient(180deg, var(--line) 0%, var(--blush-2) 50%, var(--line) 100%);
+  border-radius:1px;
 }
 .tl-item{
-  position:relative;padding:12px 0 14px;border-bottom:1px solid var(--line);
-  display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;
+  position:relative;display:grid;grid-template-columns:1fr auto;
+  gap:16px;align-items:flex-start;padding:14px 0 16px;
+  border-bottom:1px solid var(--line);transition:background .15s;
 }
 .tl-item:last-child{border-bottom:0}
+.tl-item:hover{background:rgba(251,237,240,.4);border-radius:8px;padding-left:8px;padding-right:8px;margin-left:-8px;margin-right:-8px}
 .tl-icon{
-  position:absolute;left:-34px;top:12px;
-  width:30px;height:30px;border-radius:50%;
-  display:grid;place-items:center;font-size:.85rem;
+  position:absolute;left:-46px;top:14px;width:36px;height:36px;
+  border-radius:50%;display:grid;place-items:center;font-size:.95rem;
   background:#fff;border:2px solid #fff;
-  box-shadow:0 2px 8px -3px rgba(74,20,40,.25);
+  box-shadow:0 2px 10px -3px rgba(74,20,40,.28), 0 0 0 1px rgba(240,221,226,.6);
+  z-index:1;
 }
-.tl-icon.add{background:#F5E5EC;color:#A63D5C}
-.tl-icon.remove{background:#F0F0F0;color:#8A6B76}
-.tl-icon.wa{background:#DCF5E5;color:#1FA855}
+.tl-icon.add{background:linear-gradient(135deg,#FBEDF0,#F3D8E0);color:#A63D5C}
+.tl-icon.remove{background:linear-gradient(135deg,#F1EEF0,#E5DFE2);color:#8A6B76}
+.tl-icon.wa{background:linear-gradient(135deg,#DCF5E5,#C5EDD4);color:#1FA855}
 
 .tl-main{min-width:0}
-.tl-title{font-size:.88rem;font-weight:500;line-height:1.4;margin-bottom:3px}
-.tl-title b{color:var(--ink);font-weight:600}
-.tl-meta{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tl-title{font-size:.9rem;font-weight:500;line-height:1.4;margin-bottom:6px;color:var(--ink)}
+.tl-title b{font-weight:600}
+.tl-title .verb-add{color:var(--rose)}
+.tl-title .verb-remove{color:var(--muted)}
+.tl-title .verb-wa{color:#1FA855}
+.tl-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
 .tl-code{
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:.68rem;font-weight:600;color:var(--rose);
-  background:var(--blush);padding:2px 6px;border-radius:5px;letter-spacing:.03em;
+  font-size:.66rem;font-weight:600;color:var(--rose);background:var(--blush);
+  padding:2px 7px;border-radius:6px;letter-spacing:.03em;white-space:nowrap;
 }
-.tl-time{font-size:.72rem;color:var(--muted);white-space:nowrap;text-align:right}
+.tl-name{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.tl-cat{font-size:.72rem;color:var(--muted);letter-spacing:.02em}
+.tl-cat::before{content:'·';margin-right:6px;color:var(--line)}
+.tl-time{font-size:.72rem;color:var(--muted);white-space:nowrap;text-align:right;padding-top:3px;font-variant-numeric:tabular-nums}
 
-.tl-empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:.86rem}
+.tl-empty{text-align:center;padding:56px 24px;color:var(--muted);font-size:.88rem}
+.tl-empty .tl-empty-icon{font-size:2.6rem;margin-bottom:12px;opacity:.35;display:block}
+.tl-empty .tl-empty-title{font-size:.98rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.tl-empty p{line-height:1.5}
+
+.tl-more-wrap{display:flex;justify-content:center;padding:20px 0 4px;margin-top:8px;border-top:1px solid var(--line)}
+.tl-more-wrap .btn{display:inline-flex;align-items:center;gap:10px;padding:11px 24px;font-size:.84rem}
+.tl-more-count{font-size:.7rem;font-weight:500;color:var(--muted);background:var(--blush);padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+.tl-more-wrap .btn:hover .tl-more-count{background:var(--blush-2);color:var(--rose)}
 
 @media (max-width:640px){
-  .timeline{padding-left:28px}
-  .timeline::before{left:13px}
-  .tl-icon{left:-28px;width:26px;height:26px;font-size:.75rem}
-  .tl-item{grid-template-columns:1fr;gap:4px}
-  .tl-time{text-align:left;font-size:.68rem}
+  .tl-list{padding-left:38px}
+  .tl-list::before{left:14px;top:12px;bottom:12px}
+  .tl-item{grid-template-columns:1fr;gap:6px;padding:12px 0 14px}
+  .tl-item:hover{padding-left:6px;padding-right:6px;margin-left:-6px;margin-right:-6px}
+  .tl-icon{left:-38px;width:30px;height:30px;font-size:.82rem;top:12px}
+  .tl-title{font-size:.86rem}
+  .tl-name{font-size:.78rem}
+  .tl-time{text-align:left;font-size:.7rem;padding-top:0}
+  .tl-chip{padding:8px 13px;font-size:.74rem;gap:6px;min-height:36px}
+  .tl-chip .cnt{font-size:.64rem;padding:2px 7px}
+  .tl-empty{padding:40px 20px}
+  .tl-empty .tl-empty-icon{font-size:2.2rem}
+  .tl-empty .tl-empty-title{font-size:.9rem}
+  .tl-more-wrap{padding:16px 0 4px}
+  .tl-more-wrap .btn{width:100%;justify-content:center;padding:12px 18px;font-size:.82rem}
 }
-
-/* ============================================================
-   PER-SAREE BREAKDOWN — mobile card layout
-   ============================================================ */
-.breakdown-table th,
-.breakdown-table td{
-  font-size:.82rem;
-}
-
-@media (max-width:880px){
-  .breakdown-table th,
-  .breakdown-table td{
-    padding:9px 6px !important;
-    font-size:.78rem;
-  }
-  .breakdown-table th{font-size:.62rem !important;letter-spacing:.08em !important}
-}
-
-@media (max-width:640px){
-  .breakdown-table,
-  .breakdown-table thead,
-  .breakdown-table tbody,
-  .breakdown-table tr,
-  .breakdown-table td{
-    display:block;
-    width:100%;
-  }
-  .breakdown-table thead{display:none}
-
-  .breakdown-table tr{
-    background:#fff;
-    border-radius:12px;
-    margin-bottom:10px;
-    padding:12px 14px;
-    border:1px solid var(--line) !important;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px 12px;
-  }
-  .breakdown-table tr:last-child{margin-bottom:0}
-
-  .breakdown-table td[data-label="Saree"]{
-    grid-column:1 / -1;
-    padding:0 0 8px !important;
-    border-bottom:1px solid var(--line);
-    font-size:.84rem !important;
-    line-height:1.35;
-  }
-
-  .breakdown-table td[data-label]:not([data-label="Saree"]){
-    padding:8px 0 !important;
-    text-align:left !important;
-    font-size:.85rem !important;
-    position:relative;
-    padding-left:64px !important;
-  }
-  .breakdown-table td[data-label]:not([data-label="Saree"])::before{
-    content:attr(data-label);
-    position:absolute;
-    left:0;
-    top:8px;
-    font-size:.66rem;
-    font-weight:600;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--muted);
-  }
-
-  .tl-filters{gap:6px;margin-bottom:14px}
-  .tl-chip{
-    padding:7px 13px;
-    font-size:.74rem;
-    min-height:36px;
-    gap:5px;
-  }
-  .tl-chip .cnt{font-size:.66rem;padding:1px 6px}
-}
-
-@media (max-width:480px){
-  .breakdown-table tr{padding:10px 12px;gap:6px 10px}
-  .breakdown-table td[data-label="Saree"]{font-size:.8rem !important}
-  .breakdown-table td[data-label]:not([data-label="Saree"]){
-    font-size:.8rem !important;
-    padding-left:58px !important;
-  }
-  .breakdown-table td[data-label]:not([data-label="Saree"])::before{
-    font-size:.6rem;
-    top:9px;
-  }
-}
-
 @media (max-width:380px){
-  .tl-chip{font-size:.7rem;padding:6px 11px;min-height:34px}
+  .tl-list{padding-left:34px}
+  .tl-list::before{left:12px}
+  .tl-icon{left:-34px;width:26px;height:26px;font-size:.72rem}
+  .tl-chip{padding:7px 11px;font-size:.7rem}
 }
-
-/* ============ TIMELINE — SHOW MORE ============ */
-.tl-more-wrap{
-  display:flex;
-  justify-content:center;
-  padding:22px 0 6px;
-  margin-top:8px;
-  border-top:1px solid var(--line);
-}
-.tl-more-wrap .btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:11px 24px;
-  font-size:.85rem;
-}
-.tl-more-count{
-  font-size:.7rem;
-  font-weight:500;
-  color:var(--muted);
-  background:var(--blush);
-  padding:3px 9px;
-  border-radius:999px;
-  letter-spacing:.02em;
-}
-.tl-more-wrap .btn:hover .tl-more-count{
-  background:var(--blush-2);
-  color:var(--rose);
-}
-
-@media (max-width:640px){
-  .tl-more-wrap{padding:18px 0 4px}
-  .tl-more-wrap .btn{
-    width:100%;
-    justify-content:center;
-    padding:12px 18px;
-    font-size:.82rem;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -786,61 +719,91 @@ svg.saree-art{
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* =========================================================================
-   CONFIGURE — paste the SAME Supabase URL and anon key as index.html
-   ========================================================================= */
 const SUPABASE_URL = 'https://jvsnfoedzueisooxpnzx.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_9yGQ3eRp84uUTw7NBrMbbw_zj-PGtHo';
-
-const sb = (SUPABASE_URL.startsWith('http'))
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 /* =========================================================================
-   LOGO (same markup as index.html)
+   LOGO + PLACEHOLDER SVG
    ========================================================================= */
 function logoMarkup(){
   return `<img src="anchal_logo.png" alt="Anchal" style="width:100%;height:100%;object-fit:contain;border-radius:50%;" />`;
+}
+
+function sareeArt(p){
+  const id = 'a' + (svgUid++);
+  const pal = p.palette && Array.isArray(p.palette) && p.palette.length >= 2
+    ? p.palette
+    : ['#8C2342','#4A0F23'];
+  const [c1, c2] = pal;
+  const gold = p.gold || '#C9A961';
+  return `<svg class="saree-art" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="bg${id}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="${c1}"/>
+        <stop offset="1" stop-color="${c2}"/>
+      </linearGradient>
+      <pattern id="mot${id}" width="44" height="44" patternUnits="userSpaceOnUse">
+        <path d="M22 10 L30 22 L22 34 L14 22 Z" fill="none" stroke="${gold}" stroke-width="1"/>
+        <circle cx="22" cy="22" r="2.2" fill="${gold}"/>
+      </pattern>
+    </defs>
+    <rect width="300" height="400" fill="url(#bg${id})"/>
+    <rect width="300" height="400" fill="url(#mot${id})" opacity=".2"/>
+    <rect y="370" width="300" height="4" fill="${gold}" opacity=".9"/>
+    <rect y="380" width="300" height="2" fill="${gold}" opacity=".6"/>
+  </svg>`;
 }
 
 /* =========================================================================
    STATE
    ========================================================================= */
 let SAREES = [];
-let FAVOURITE_COUNTS = {};   // { saree_id: count }
-let FAV_EVENTS = [];         // [{ saree_id, created_at }, ...]
-let WA_EVENTS = [];          // [{ saree_id, created_at }, ...]
-let ACTIVITY = [];           // [{ id, saree_id, event_type, created_at }, ...]
-let TIMELINE_FILTER = 'all'; // all | added | removed | enquiry
-let TIMELINE_SHOWN = 10;     // how many events are currently visible
+let FAVOURITE_COUNTS = {};
+let FAV_EVENTS = [];
+let WA_EVENTS = [];
+let ACTIVITY = [];
+let TIMELINE_FILTER = 'all';
+let TIMELINE_SHOWN = 10;
 const TIMELINE_PAGE_SIZE = 10;
 let SESSION = null;
 let svgUid = 0;
 let liveChannel = null;
-let authTab = 'signin';       // signin | signup | forgot
-let authMsg = null;           // { type, text }
+let authTab = 'signin';
+let authMsg = null;
 let PENDING = { stock:{}, deletes:new Set() };
 let EDITING_ID = null;
-let EDITING_FILE_URL = null;  // object URL for the live preview
-let EDITING_REMOVE = false;   // user asked to remove the photo
-let ADD_FILE = null;
-let ADD_FILE_URL = null;         
+
+let ADD_IMAGES = [];
+let EDIT_IMAGES = [];
+
+/* Inventory state */
+let INVENTORY_QUERY = '';
+let INVENTORY_SORT = 'created';
+let INVENTORY_SORT_DIR = 'desc';
+let INVENTORY_SHOWN = 10;
+const INVENTORY_PAGE_SIZE = 10;
+
+const SIZE_OPTIONS = ['M','L','XL','XXL'];
+const PRODUCT_TYPES = [
+  { value:'saree',    label:'Saree' },
+  { value:'kurti',    label:'Kurti' },
+  { value:'churidar', label:'Churidar' }
+];
+
+function productTypeLabel(value){
+  const t = PRODUCT_TYPES.find(x => x.value === value);
+  return t ? t.label : (value ? value.charAt(0).toUpperCase() + value.slice(1) : '—');
+}
 
 /* =========================================================================
    HELPERS
    ========================================================================= */
 const money = n => '₹' + Number(n).toLocaleString('en-IN');
 function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-  }[c]));
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
-function starsStr(n){
-  n = Math.round(n);
-  return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n));
-}
-
+function starsStr(n){ n = Math.round(n); return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n)); }
 function timeAgo(ts){
   const now = Date.now();
   const then = new Date(ts).getTime();
@@ -849,47 +812,261 @@ function timeAgo(ts){
   if(s < 60) return s + ' sec ago';
   if(s < 3600) return Math.floor(s / 60) + ' min ago';
   if(s < 86400) return Math.floor(s / 3600) + ' hr ago';
-  if(s < 604800){
-    const d = Math.floor(s / 86400);
-    return d + ' day' + (d === 1 ? '' : 's') + ' ago';
-  }
-  if(s < 2592000){
-    const w = Math.floor(s / 604800);
-    return w + ' week' + (w === 1 ? '' : 's') + ' ago';
-  }
+  if(s < 604800){ const d = Math.floor(s / 86400); return d + ' day' + (d === 1 ? '' : 's') + ' ago'; }
+  if(s < 2592000){ const w = Math.floor(s / 604800); return w + ' week' + (w === 1 ? '' : 's') + ' ago'; }
   return new Date(ts).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
 }
 const findSaree = id => SAREES.find(s => s.id === id);
 
-function sareeArt(p){
-  const id = 'a' + (svgUid++);
-  const pal = p.palette || ['#8C2342','#4A0F23'];
-  const [c1, c2] = pal;
-  const gold = p.gold || '#C9A961';
-  return `<svg class="saree-art" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="bg${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
-      <linearGradient id="pl${id}" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="${c2}" stop-opacity=".95"/><stop offset="1" stop-color="${c1}" stop-opacity=".8"/></linearGradient>
-      <pattern id="mot${id}" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M22 10 L30 22 L22 34 L14 22 Z" fill="none" stroke="${gold}" stroke-width="1"/><circle cx="22" cy="22" r="2.2" fill="${gold}"/></pattern>
-    </defs>
-    <rect width="300" height="400" fill="url(#bg${id})"/>
-    <rect width="300" height="400" fill="url(#mot${id})" opacity=".2"/>
-    <path d="M300 0 L300 400 L176 400 L214 0 Z" fill="url(#pl${id})" opacity=".92"/>
-    <path d="M214 0 L176 400" stroke="${gold}" stroke-width="3" fill="none" opacity=".85"/>
-    <rect y="370" width="300" height="4" fill="${gold}" opacity=".9"/>
-  </svg>`;
+function normalizeJson(val, fallback){
+  if(val === null || val === undefined) return fallback;
+  if(typeof val === 'object') return val;
+  if(typeof val === 'string'){
+    try { return JSON.parse(val); } catch(e){ return fallback; }
+  }
+  return fallback;
 }
 
 /* =========================================================================
-   DATA
+   COLOUR EXTRACTION
+   ========================================================================= */
+function extractDominantColor(file){
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      try{
+        const W = 120, H = 120;
+        const canvas = document.createElement('canvas');
+        canvas.width = W; canvas.height = H;
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0, W, H);
+        const data = ctx.getImageData(0, 0, W, H).data;
+
+        const buckets = {};
+        for(let i = 0; i < data.length; i += 4){
+          const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+          if(a < 200) continue;
+          const max = Math.max(r, g, b), min = Math.min(r, g, b);
+          const l = (max + min) / 2;
+          if(l > 235 || l < 25) continue;
+          const d = max - min;
+          const sat = max === 0 ? 0 : d / max;
+          if(sat < 0.15) continue;
+          const key = (Math.round(r/32)*32) + ',' + (Math.round(g/32)*32) + ',' + (Math.round(b/32)*32);
+          buckets[key] = (buckets[key] || 0) + 1;
+        }
+
+        let bestKey = null, bestCount = 0;
+        for(const k in buckets){
+          if(buckets[k] > bestCount){ bestCount = buckets[k]; bestKey = k; }
+        }
+
+        if(!bestKey){
+          resolve({ hex: '#CCCCCC', name: 'Custom' });
+          return;
+        }
+        const [r, g, b] = bestKey.split(',').map(n => Math.min(255, parseInt(n)));
+        const hex = '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+        resolve({ hex, name: nameForHex(hex) });
+      } catch(err){
+        resolve({ hex: '#CCCCCC', name: 'Custom' });
+      }
+    };
+    img.onerror = () => resolve({ hex: '#CCCCCC', name: 'Custom' });
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+function nameForHex(hex){
+  const m = hex.replace('#','');
+  const r = parseInt(m.slice(0,2), 16);
+  const g = parseInt(m.slice(2,4), 16);
+  const b = parseInt(m.slice(4,6), 16);
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  const d = max - min;
+  const l = (max + min) / 2;
+  let h = 0;
+  if(d !== 0){
+    if(max === r) h = ((g - b) / d) % 6;
+    else if(max === g) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
+    h = Math.round(h * 60);
+    if(h < 0) h += 360;
+  }
+  const s = max === 0 ? 0 : d / max;
+  if(l < 35) return 'Black';
+  if(l > 225 && s < 0.12) return 'White';
+  if(s < 0.13){
+    if(l < 90) return 'Charcoal';
+    if(l < 175) return 'Grey';
+    return 'Ivory';
+  }
+  const light = l > 170;
+  const dark = l < 95;
+  if(h < 15 || h >= 345) return dark ? 'Maroon' : light ? 'Blush' : 'Red';
+  if(h < 30)  return light ? 'Peach'  : dark ? 'Brick'   : 'Orange';
+  if(h < 45)  return light ? 'Apricot': dark ? 'Amber'   : 'Mustard';
+  if(h < 65)  return light ? 'Cream'  : dark ? 'Ochre'   : 'Gold';
+  if(h < 90)  return light ? 'Pale Yellow' : dark ? 'Olive' : 'Yellow';
+  if(h < 150) return light ? 'Mint'   : dark ? 'Forest'  : 'Green';
+  if(h < 175) return light ? 'Seafoam': dark ? 'Emerald' : 'Sage';
+  if(h < 195) return light ? 'Aqua'   : dark ? 'Teal'    : 'Turquoise';
+  if(h < 225) return light ? 'Sky'    : dark ? 'Navy'    : 'Ocean';
+  if(h < 250) return light ? 'Powder Blue' : dark ? 'Indigo' : 'Royal Blue';
+  if(h < 280) return light ? 'Lilac'  : dark ? 'Plum'    : 'Violet';
+  if(h < 305) return light ? 'Mauve'  : dark ? 'Aubergine' : 'Purple';
+  if(h < 330) return light ? 'Blush'  : dark ? 'Wine'    : 'Rose';
+  return light ? 'Pink' : dark ? 'Deep Pink' : 'Rani Pink';
+}
+
+/* =========================================================================
+   IMAGE HELPERS
+   ========================================================================= */
+function makeId(){ return 'img_' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+async function addImagesFromFiles(files, target){
+  const list = target === 'add' ? ADD_IMAGES : EDIT_IMAGES;
+  const arr = Array.from(files || []);
+  if(!arr.length) return;
+
+  const existing = new Set(list.map(x => x.file ? (x.file.name + '::' + x.file.size) : ''));
+  const fresh = arr.filter(f => f.type.startsWith('image/') && !existing.has(f.name + '::' + f.size));
+  if(!fresh.length){
+    toast('Those photos are already added');
+    return;
+  }
+
+  for(const file of fresh){
+    const _id = makeId();
+    const previewUrl = URL.createObjectURL(file);
+    const item = { _id, file, previewUrl, url: null, hex: null, name: '', _extracting: true };
+    list.push(item);
+  }
+  updateImagesGrid(target);
+
+  for(let i = 0; i < fresh.length; i++){
+    const file = fresh[i];
+    const item = list[list.length - fresh.length + i];
+    try{
+      const { hex, name } = await extractDominantColor(file);
+      item.hex = hex;
+      item.name = name;
+      item._extracting = false;
+    } catch(e){
+      item.hex = '#CCCCCC';
+      item.name = 'Colour';
+      item._extracting = false;
+    }
+    updateImagesGrid(target);
+  }
+}
+
+function removeImage(target, _id){
+  const list = target === 'add' ? ADD_IMAGES : EDIT_IMAGES;
+  const idx = list.findIndex(x => x._id === _id);
+  if(idx === -1) return;
+  const item = list[idx];
+  if(item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+  list.splice(idx, 1);
+  updateImagesGrid(target);
+}
+
+function updateImageName(target, _id, name){
+  const list = target === 'add' ? ADD_IMAGES : EDIT_IMAGES;
+  const item = list.find(x => x._id === _id);
+  if(item) item.name = name;
+}
+
+async function uploadAllImages(list){
+  const out = [];
+  for(const item of list){
+    if(item.url){
+      out.push({ url: item.url, hex: item.hex || '#CCCCCC', name: item.name || 'Colour' });
+      continue;
+    }
+    try{
+      const url = await uploadSareePhoto(item.file);
+      out.push({ url, hex: item.hex || '#CCCCCC', name: item.name || 'Colour' });
+    } catch(err){
+      console.error('Upload failed', err);
+    }
+  }
+  return out;
+}
+
+function updateImagesGrid(target){
+  const formId = target === 'add' ? 'addForm' : 'editSareeForm';
+  const form = document.getElementById(formId);
+  if(!form) return;
+  const list = target === 'add' ? ADD_IMAGES : EDIT_IMAGES;
+  const oldGrid = form.querySelector('.image-grid');
+  if(!oldGrid) return;
+
+  const temp = document.createElement('div');
+  temp.innerHTML = renderImagesBlock(list, target);
+  const newGrid = temp.firstElementChild;
+
+  oldGrid.replaceWith(newGrid);
+}
+
+function itemPreview(item){
+  return item.previewUrl || item.url || '';
+}
+
+function renderImageTile(item, target, isPrimary){
+  const extracting = item._extracting;
+  const src = itemPreview(item);
+  return `
+    <div class="image-tile">
+      <div class="thumb">
+        ${src ? `<img src="${src}" alt="" />` : ''}
+        ${isPrimary ? `<span class="primary-tag">Primary</span>` : ''}
+        <button type="button" class="remove" data-action="remove-image" data-target="${target}" data-imgid="${item._id}" title="Remove">×</button>
+        ${extracting ? `<div class="extracting">Detecting colour…</div>` : ''}
+      </div>
+      <div class="meta">
+        <div class="color-row">
+          <span class="color-dot" style="background:${item.hex || '#EEEEEE'}"></span>
+          <span class="color-hex">${escapeHtml(item.hex || '—')}</span>
+        </div>
+        <input type="text" class="color-name" placeholder="Colour name"
+               value="${escapeHtml(item.name || '')}"
+               data-action="image-name" data-target="${target}" data-imgid="${item._id}" />
+      </div>
+    </div>`;
+}
+
+function renderImagesBlock(list, target){
+  const tiles = list.map((item, i) => renderImageTile(item, target, i === 0)).join('');
+  return `
+    <div class="image-grid">
+      ${tiles}
+      <label class="image-tile add-tile">
+        <div>
+          <div class="plus">+</div>
+          <div class="lbl-main">Add photos</div>
+          <div class="lbl-sub">Select one or many at once</div>
+        </div>
+        <input type="file" accept="image/*" multiple
+               data-action="add-images" data-target="${target}"
+               style="display:none" />
+      </label>
+    </div>`;
+}
+
+/* =========================================================================
+   DATA LOADING
    ========================================================================= */
 async function loadSarees(){
-  if(!sb) return;
   const { data } = await sb.from('sarees').select('*').order('created_at', { ascending: false });
-  SAREES = data || [];
+  SAREES = (data || []).map(p => ({
+    ...p,
+    palette: normalizeJson(p.palette, []),
+    sizes:   normalizeJson(p.sizes, []),
+    images:  normalizeJson(p.images, [])
+  }));
 }
 async function loadFavouriteCounts(){
-  if(!sb) return;
   const [favRes, waRes, actRes] = await Promise.all([
     sb.from('favourites').select('saree_id, created_at'),
     sb.from('whatsapp_enquiries').select('saree_id, created_at'),
@@ -899,13 +1076,11 @@ async function loadFavouriteCounts(){
   FAV_EVENTS = favRes.data || [];
   WA_EVENTS = waRes.data || [];
   ACTIVITY = actRes.data || [];
-
   const counts = {};
   FAV_EVENTS.forEach(r => { counts[r.saree_id] = (counts[r.saree_id] || 0) + 1; });
   FAVOURITE_COUNTS = counts;
 }
 async function loadSession(){
-  if(!sb){ SESSION = null; return; }
   const { data: { session } } = await sb.auth.getSession();
   SESSION = session;
 }
@@ -917,7 +1092,6 @@ async function signUp(email, password){
   authMsg = null;
   const { error } = await sb.auth.signUp({ email, password });
   if(error){ authMsg = { type:'error', text: error.message }; return; }
-  // Try immediate sign in (in case email confirmation is off)
   const { error: e2 } = await sb.auth.signInWithPassword({ email, password });
   if(e2){ authMsg = { type:'info', text: 'Account created. Please check your email to confirm, then sign in.' }; authTab = 'signin'; return; }
   await loadSession();
@@ -928,7 +1102,8 @@ async function signIn(email, password){
   const { error } = await sb.auth.signInWithPassword({ email, password });
   if(error){ authMsg = { type:'error', text: error.message }; render(); return; }
   await loadSession();
-  await loadSarees(); await loadFavouriteCounts();
+  await loadSarees();
+  await loadFavouriteCounts();
   subscribeRealtime();
   render();
 }
@@ -953,48 +1128,40 @@ async function changePassword(newPassword){
   if(error){ toast(error.message, 'error'); return; }
   toast('Password updated successfully', 'success');
 }
-
-/* Handle password-reset redirect (user clicked the email link) */
 async function handleResetRedirect(){
   if(!location.hash.includes('reset')) return false;
-  // Supabase sets a session from the URL hash automatically
   await loadSession();
-  if(!SESSION) return false;
-  return true;
+  return !!SESSION;
 }
 
 /* =========================================================================
-   REALTIME SUBSCRIPTION — makes the favourites graph "live"
+   REALTIME
    ========================================================================= */
 function subscribeRealtime(){
-  if(!sb || liveChannel) return;
+  if(liveChannel) return;
   liveChannel = sb.channel('admin_live')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'favourites' }, async () => {
-      await loadFavouriteCounts();
-      render();
+      await loadFavouriteCounts(); render();
     })
     .on('postgres_changes', { event: '*', schema: 'public', table: 'whatsapp_enquiries' }, async () => {
-      await loadFavouriteCounts();
-      render();
+      await loadFavouriteCounts(); render();
     })
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity_log' }, async () => {
-      await loadFavouriteCounts();
-      render();
+      await loadFavouriteCounts(); render();
     })
     .subscribe();
 }
 
 /* =========================================================================
-   CHART — real-time favourites bar chart
+   CHARTS
    ========================================================================= */
 function renderFavouritesChart(){
   const ranked = [...SAREES].sort((a,b) => (FAVOURITE_COUNTS[b.id] || 0) - (FAVOURITE_COUNTS[a.id] || 0));
   const max = Math.max(1, ...ranked.map(s => FAVOURITE_COUNTS[s.id] || 0));
   const untouched = ranked.filter(s => !FAVOURITE_COUNTS[s.id]);
   const total = Object.values(FAVOURITE_COUNTS).reduce((s, n) => s + n, 0);
-
   if(SAREES.length === 0){
-    return `<div style="text-align:center;padding:40px;color:var(--muted);font-size:.86rem">Add sarees to see favourites.</div>`;
+    return `<div style="text-align:center;padding:40px;color:var(--muted);font-size:.86rem">Add products to see favourites.</div>`;
   }
   return `
     <div style="margin-bottom:18px;display:flex;gap:26px;flex-wrap:wrap">
@@ -1012,9 +1179,7 @@ function renderFavouritesChart(){
           <div class="lb-count ${c === 0 ? 'zero' : ''}">${c}</div>
         </div>`;
       }).join('')}
-    </div>
-    ${untouched.length ? `<p style="margin-top:20px;font-size:.83rem;color:var(--muted)"><b style="color:var(--ink)">Never touched:</b><br>${untouched.map(s => `<span class="untouched-pill">${escapeHtml(s.name)}</span>`).join('')}</p>` : ''}
-  `;
+    </div>`;
 }
 
 function renderStockDonut(){
@@ -1022,8 +1187,7 @@ function renderStockDonut(){
   const low = SAREES.filter(p => p.stock > 0 && p.stock <= 5).length;
   const out = SAREES.filter(p => p.stock <= 0).length;
   const total = SAREES.length;
-  if(total === 0) return `<div style="text-align:center;padding:40px;color:var(--muted);font-size:.86rem">No sarees yet.</div>`;
-
+  if(total === 0) return `<div style="text-align:center;padding:40px;color:var(--muted);font-size:.86rem">No products yet.</div>`;
   const segs = [
     { label:'In Stock', value:inStock, color:'#1E7A5A' },
     { label:'Low Stock', value:low, color:'#E08C2B' },
@@ -1046,7 +1210,7 @@ function renderStockDonut(){
       <circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="#F0DDE2" stroke-width="${S}"/>
       ${arcs}
       <text x="${CX}" y="${CY - 2}" text-anchor="middle" font-size="26" font-weight="600" fill="#2B1B22">${total}</text>
-      <text x="${CX}" y="${CY + 18}" text-anchor="middle" font-size="11" fill="#8A6B76">Sarees</text>
+      <text x="${CX}" y="${CY + 18}" text-anchor="middle" font-size="11" fill="#8A6B76">Products</text>
     </svg>
     <div class="legend">${legend}</div>`;
 }
@@ -1057,16 +1221,13 @@ function renderEnquiryTrendChart(){
   const nowEnd = new Date();
   nowEnd.setHours(23,59,59,999);
   const nowTs = nowEnd.getTime();
-
   const favBuckets = Array(days).fill(0);
-  const waBuckets  = Array(days).fill(0);
+  const waBuckets = Array(days).fill(0);
   const labels = [];
-
   for(let i = days - 1; i >= 0; i--){
     const d = new Date(nowTs - i * dayMs);
     labels.push(d.toLocaleDateString('en-IN', { day:'numeric', month:'short' }));
   }
-
   FAV_EVENTS.forEach(e => {
     const ts = new Date(e.created_at).getTime();
     const idx = days - 1 - Math.floor((nowTs - ts) / dayMs);
@@ -1077,11 +1238,9 @@ function renderEnquiryTrendChart(){
     const idx = days - 1 - Math.floor((nowTs - ts) / dayMs);
     if(idx >= 0 && idx < days) waBuckets[idx]++;
   });
-
   const totalFav = favBuckets.reduce((s,n) => s+n, 0);
-  const totalWa  = waBuckets.reduce((s,n) => s+n, 0);
-  const hasData  = totalFav + totalWa > 0;
-
+  const totalWa = waBuckets.reduce((s,n) => s+n, 0);
+  const hasData = totalFav + totalWa > 0;
   const legend = `
     <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px">
       <div style="display:flex;align-items:center;gap:8px">
@@ -1095,132 +1254,100 @@ function renderEnquiryTrendChart(){
         <b style="font-size:.9rem;color:var(--deep);margin-left:2px">${totalWa}</b>
       </div>
     </div>`;
-
   if(!hasData){
     return legend + `<div style="text-align:center;padding:36px 20px;color:var(--muted);font-size:.86rem">
       <div style="font-size:2rem;margin-bottom:8px">📈</div>
-      No activity yet — the line will appear as customers favourite and enquire about sarees.
+      No activity yet — the line will appear as customers favourite and enquire.
     </div>`;
   }
-
   const W = 720, H = 260;
   const PAD_L = 44, PAD_R = 22, PAD_T = 24, PAD_B = 40;
   const chartW = W - PAD_L - PAD_R;
   const chartH = H - PAD_T - PAD_B;
-
   const maxVal = Math.max(...favBuckets, ...waBuckets, 1);
   const niceMax = [4,8,12,16,20,24,32,40,60,100].find(c => c >= maxVal) || 100;
-
   const stepX = chartW / (days - 1);
-  const makePoints = arr => arr.map((v, i) => ({
-    x: PAD_L + i * stepX,
-    y: PAD_T + chartH - (v / niceMax) * chartH,
-    v
-  }));
+  const makePoints = arr => arr.map((v, i) => ({ x: PAD_L + i * stepX, y: PAD_T + chartH - (v / niceMax) * chartH, v }));
   const favPts = makePoints(favBuckets);
-  const waPts  = makePoints(waBuckets);
-
+  const waPts = makePoints(waBuckets);
   const buildPath = pts => pts.map((p,i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ' ' + p.y.toFixed(1)).join(' ');
-  const favLine = buildPath(favPts);
-  const waLine  = buildPath(waPts);
-
   const gridLines = [0,.25,.5,.75,1].map(f => {
     const y = PAD_T + chartH * (1 - f);
     const val = Math.round(niceMax * f);
     return `<line x1="${PAD_L}" y1="${y}" x2="${PAD_L + chartW}" y2="${y}" stroke="#F0DDE2" stroke-dasharray="3 4"/>
             <text x="${PAD_L - 8}" y="${y + 4}" text-anchor="end" font-size="10" fill="#8A6B76">${val}</text>`;
   }).join('');
-
   const xLabels = labels.map((lbl, i) => {
     if(i % 2 !== 0 && i !== labels.length - 1) return '';
     return `<text x="${favPts[i].x}" y="${H - 12}" text-anchor="middle" font-size="10" fill="#8A6B76">${lbl}</text>`;
   }).join('');
-
-  const favDots = favPts.map(p => p.v > 0
-    ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#A63D5C" stroke-width="2"><title>${p.v} favourite${p.v===1?'':'s'}</title></circle>`
-    : '').join('');
-  const waDots = waPts.map(p => p.v > 0
-    ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#25D366" stroke-width="2"><title>${p.v} WhatsApp enquir${p.v===1?'y':'ies'}</title></circle>`
-    : '').join('');
-
+  const favDots = favPts.map(p => p.v > 0 ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#A63D5C" stroke-width="2"><title>${p.v} favourites</title></circle>` : '').join('');
+  const waDots = waPts.map(p => p.v > 0 ? `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#fff" stroke="#25D366" stroke-width="2"><title>${p.v} enquiries</title></circle>` : '').join('');
   return legend + `
     <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block;overflow:visible">
       ${gridLines}
-      <path d="${favLine}" fill="none" stroke="#A63D5C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-      <path d="${waLine}"  fill="none" stroke="#25D366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-      ${favDots}
-      ${waDots}
-      ${xLabels}
+      <path d="${buildPath(favPts)}" fill="none" stroke="#A63D5C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="${buildPath(waPts)}" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${favDots}${waDots}${xLabels}
     </svg>
-    <p style="margin-top:12px;font-size:.76rem;color:var(--muted);text-align:center">Last 14 days · updates live</p>
-  `;
+    <p style="margin-top:12px;font-size:.76rem;color:var(--muted);text-align:center">Last 14 days · updates live</p>`;
 }
 
 function renderTimeline(){
   let items = ACTIVITY.slice();
-
-  if(TIMELINE_FILTER === 'added'){
-    items = items.filter(x => x.event_type === 'favourite_added');
-  } else if(TIMELINE_FILTER === 'removed'){
-    items = items.filter(x => x.event_type === 'favourite_removed');
-  } else if(TIMELINE_FILTER === 'enquiry'){
-    items = items.filter(x => x.event_type === 'whatsapp_enquiry');
-  }
-
+  if(TIMELINE_FILTER === 'added') items = items.filter(x => x.event_type === 'favourite_added');
+  else if(TIMELINE_FILTER === 'removed') items = items.filter(x => x.event_type === 'favourite_removed');
+  else if(TIMELINE_FILTER === 'enquiry') items = items.filter(x => x.event_type === 'whatsapp_enquiry');
   const countAll     = ACTIVITY.length;
   const countAdded   = ACTIVITY.filter(x => x.event_type === 'favourite_added').length;
   const countRemoved = ACTIVITY.filter(x => x.event_type === 'favourite_removed').length;
   const countWa      = ACTIVITY.filter(x => x.event_type === 'whatsapp_enquiry').length;
-
   const chips = `
     <div class="tl-filters">
-      <button class="tl-chip ${TIMELINE_FILTER === 'all' ? 'active' : ''}" data-action="tl-filter" data-filter="all">
-        All activity <span class="cnt">${countAll}</span>
-      </button>
-      <button class="tl-chip ${TIMELINE_FILTER === 'added' ? 'active' : ''}" data-action="tl-filter" data-filter="added">
-        ♥ Added <span class="cnt">${countAdded}</span>
-      </button>
-      <button class="tl-chip ${TIMELINE_FILTER === 'removed' ? 'active' : ''}" data-action="tl-filter" data-filter="removed">
-        ♡ Removed <span class="cnt">${countRemoved}</span>
-      </button>
-      <button class="tl-chip ${TIMELINE_FILTER === 'enquiry' ? 'active' : ''}" data-action="tl-filter" data-filter="enquiry">
-        💬 WhatsApp <span class="cnt">${countWa}</span>
-      </button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'all' ? 'active' : ''}" data-action="tl-filter" data-filter="all">All activity <span class="cnt">${countAll}</span></button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'added' ? 'active' : ''}" data-action="tl-filter" data-filter="added">♥ Added <span class="cnt">${countAdded}</span></button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'removed' ? 'active' : ''}" data-action="tl-filter" data-filter="removed">♡ Removed <span class="cnt">${countRemoved}</span></button>
+      <button class="tl-chip ${TIMELINE_FILTER === 'enquiry' ? 'active' : ''}" data-action="tl-filter" data-filter="enquiry">💬 WhatsApp <span class="cnt">${countWa}</span></button>
     </div>`;
-
   if(items.length === 0){
-    return chips + `<div class="tl-empty">
-      No activity to show for this filter yet.
-    </div>`;
+    const emptyMessage = TIMELINE_FILTER === 'all'
+      ? { icon: '📭', title: 'No activity yet', sub: 'As customers browse your collection, their favourites and enquiries will appear here in real time.' }
+      : TIMELINE_FILTER === 'added'
+        ? { icon: '♡', title: 'No favourites yet', sub: 'When someone saves a product, it will show up here.' }
+        : TIMELINE_FILTER === 'removed'
+          ? { icon: '✦', title: 'Nothing removed', sub: "Customers haven't removed any favourites from their wishlist." }
+          : { icon: '💬', title: 'No WhatsApp enquiries yet', sub: 'Once someone taps WhatsApp on the store, the enquiry will appear here.' };
+    return chips + `
+      <div class="tl-empty">
+        <span class="tl-empty-icon">${emptyMessage.icon}</span>
+        <div class="tl-empty-title">${emptyMessage.title}</div>
+        <p>${emptyMessage.sub}</p>
+      </div>`;
   }
-
   const visible = items.slice(0, TIMELINE_SHOWN);
   const hasMore = items.length > TIMELINE_SHOWN;
   const remaining = items.length - TIMELINE_SHOWN;
-
   const list = visible.map(item => {
     const s = findSaree(item.saree_id);
     if(!s) return '';
-    let cls, icon, verb;
-    if(item.event_type === 'favourite_added'){ cls = 'add'; icon = '♥'; verb = 'added to favourites'; }
-    else if(item.event_type === 'favourite_removed'){ cls = 'remove'; icon = '♡'; verb = 'removed from favourites'; }
-    else { cls = 'wa'; icon = '💬'; verb = 'sent a WhatsApp enquiry'; }
+    let cls, icon, verb, verbClass;
+    if(item.event_type === 'favourite_added'){ cls = 'add'; icon = '♥'; verb = 'added to favourites'; verbClass = 'verb-add'; }
+    else if(item.event_type === 'favourite_removed'){ cls = 'remove'; icon = '♡'; verb = 'removed from favourites'; verbClass = 'verb-remove'; }
+    else { cls = 'wa'; icon = '💬'; verb = 'sent a WhatsApp enquiry'; verbClass = 'verb-wa'; }
     return `
       <div class="tl-item">
         <div class="tl-icon ${cls}">${icon}</div>
         <div class="tl-main">
-          <div class="tl-title">Someone <b>${verb}</b></div>
+          <div class="tl-title">Someone <b class="${verbClass}">${verb}</b></div>
           <div class="tl-meta">
             ${s.code ? `<span class="tl-code">${escapeHtml(s.code)}</span>` : ''}
-            <span>${escapeHtml(s.name)}</span>
-            <span>·</span>
-            <span>${escapeHtml(s.category)}</span>
+            <span class="tl-name">${escapeHtml(s.name)}</span>
+            <span class="tl-cat">${escapeHtml(s.category)}</span>
           </div>
         </div>
         <div class="tl-time">${timeAgo(item.created_at)}</div>
       </div>`;
   }).join('');
-
   const moreBtn = hasMore ? `
     <div class="tl-more-wrap">
       <button class="btn btn-ghost btn-sm" data-action="tl-show-more">
@@ -1228,8 +1355,179 @@ function renderTimeline(){
         <span class="tl-more-count">${remaining} remaining</span>
       </button>
     </div>` : '';
+  return chips + `<div class="tl-list">${list}</div>` + moreBtn;
+}
 
-  return chips + `<div class="timeline">${list}</div>` + moreBtn;
+/* =========================================================================
+   INVENTORY HELPERS
+   ========================================================================= */
+function sortIcon(field){
+  if(INVENTORY_SORT !== field) return '↕';
+  return INVENTORY_SORT_DIR === 'asc' ? '↑' : '↓';
+}
+
+function getInventoryList(){
+  let list = SAREES.slice();
+  const q = INVENTORY_QUERY.toLowerCase().trim();
+
+  if(q){
+    list = list.filter(s => {
+      const hay = ((s.name||'') + ' ' + (s.code||'') + ' ' + (s.fabric||'') + ' ' + (s.category||'')).toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  const dir = INVENTORY_SORT_DIR === 'asc' ? 1 : -1;
+  if(INVENTORY_SORT === 'name'){
+    list.sort((a,b) => (a.name||'').localeCompare(b.name||'') * dir);
+  } else if(INVENTORY_SORT === 'price'){
+    list.sort((a,b) => ((a.price||0) - (b.price||0)) * dir);
+  } else if(INVENTORY_SORT === 'stock'){
+    list.sort((a,b) => ((a.stock||0) - (b.stock||0)) * dir);
+  } else {
+    list.sort((a,b) => {
+      const ta = new Date(a.created_at).getTime() || 0;
+      const tb = new Date(b.created_at).getTime() || 0;
+      return (ta - tb) * dir;
+    });
+  }
+
+  return list;
+}
+
+function renderInventoryRow(s){
+  const c = FAVOURITE_COUNTS[s.id] || 0;
+  const staged = PENDING.stock[s.id];
+  const displayStock = staged !== undefined ? staged : s.stock;
+  const isStagedDelete = PENDING.deletes.has(s.id);
+  const dirty = staged !== undefined;
+  const stClass = displayStock <= 0 ? 'out' : displayStock <= 5 ? 'low' : '';
+  const images = Array.isArray(s.images) ? s.images : [];
+  const typeLabel = (s.product_type || 'saree').toUpperCase();
+  const thumbUrl = images[0]?.url || s.image_url;
+
+  return `<tr class="${isStagedDelete ? 'staged-delete' : ''}">
+    <td><div class="tbl-product">
+      <div class="tbl-thumb">${thumbUrl ? `<img src="${escapeHtml(thumbUrl)}" alt="" style="width:100%;height:100%;object-fit:cover" />` : sareeArt(s)}</div>
+      <div class="tbl-info">
+        <strong>${escapeHtml(s.name)}</strong>
+        <span>${s.code ? `<span style="font-family:ui-monospace,monospace;font-size:.66rem;font-weight:600;color:var(--rose);background:var(--blush);padding:1px 5px;border-radius:5px;margin-right:5px">${escapeHtml(s.code)}</span>` : ''}${typeLabel} · ${escapeHtml(s.category)}</span>
+      </div>
+    </div></td>
+    <td><b>${money(s.price)}</b></td>
+    <td><input class="stock-input ${stClass} ${dirty ? 'dirty' : ''}" type="number" min="0" value="${displayStock}" data-action="update-stock" data-id="${s.id}" ${isStagedDelete ? 'disabled' : ''} /></td>
+    <td>
+      ${images.length
+        ? `<div class="color-stack">${images.slice(0,4).map(img => `<span class="dot" style="background:${escapeHtml(img.hex || '#EEE')}" title="${escapeHtml(img.name || '')}"></span>`).join('')}${images.length > 4 ? `<span class="more">+${images.length - 4}</span>` : ''}</div>`
+        : `<span style="font-size:.72rem;color:var(--muted)">—</span>`}
+    </td>
+    <td><div class="fav-cell ${c === 0 ? 'zero' : ''}">${c > 0 ? `<span class="heart-ic">♥</span> ${c}` : `<span class="untouched-pill">None</span>`}</div></td>
+    <td><div class="row-actions">
+      ${isStagedDelete
+        ? `<button class="row-undo" data-action="undo-delete" data-id="${s.id}">Undo</button>`
+        : `<button class="icon-btn edit" data-action="edit-saree" data-id="${s.id}" title="Edit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </button>
+          <button class="icon-btn" data-action="delete-saree" data-id="${s.id}" title="Delete">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg>
+          </button>`}
+    </div></td>
+  </tr>`;
+}
+
+function renderInventoryTableInner(){
+  if(SAREES.length === 0){
+    return `<p style="color:var(--muted);font-size:.88rem;padding:20px 0">No products yet — add one below.</p>`;
+  }
+
+  const list = getInventoryList();
+  const total = list.length;
+
+  if(total === 0 && INVENTORY_QUERY.trim()){
+    return `
+      <div class="inv-empty show">
+        <svg class="empty-illustration" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="emptyBox" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FBEDF0"/>
+              <stop offset="100%" stop-color="#F3D8E0"/>
+            </linearGradient>
+            <linearGradient id="emptyLid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F3D8E0"/>
+              <stop offset="100%" stop-color="#E8C6D1"/>
+            </linearGradient>
+            <linearGradient id="emptyGlass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="100%" stop-color="#FBE9EF"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="100" cy="148" rx="62" ry="7" fill="#F0DDE2" opacity=".7"/>
+          <path d="M52 70 L148 70 L156 138 Q156 144 150 144 L50 144 Q44 144 44 138 Z" fill="url(#emptyBox)"/>
+          <path d="M52 70 L148 70 L148 90 L52 90 Z" fill="#E8C6D1" opacity=".5"/>
+          <path d="M46 62 L154 62 L154 74 Q154 76 152 76 L48 76 Q46 76 46 74 Z" fill="url(#emptyLid)"/>
+          <line x1="60" y1="112" x2="140" y2="112" stroke="#E8C6D1" stroke-width="1.4" opacity=".8"/>
+          <circle cx="126" cy="46" r="20" fill="url(#emptyGlass)" stroke="#A63D5C" stroke-width="2.4"/>
+          <circle cx="126" cy="46" r="20" fill="#A63D5C" opacity=".06"/>
+          <line x1="140" y1="61" x2="152" y2="74" stroke="#A63D5C" stroke-width="3" stroke-linecap="round"/>
+          <text x="126" y="54" text-anchor="middle" font-family="Poppins,sans-serif" font-size="22" font-weight="700" fill="#A63D5C">?</text>
+          <circle cx="42" cy="34" r="3" fill="#C9A961" opacity=".6"/>
+          <circle cx="60" cy="24" r="2" fill="#C9A961" opacity=".4"/>
+          <circle cx="164" cy="120" r="3" fill="#C9A961" opacity=".5"/>
+        </svg>
+        <div class="empty-title">No Result Found</div>
+        <div class="empty-sub">We couldn't find any product matching your search. Try a different name, ID or fabric.</div>
+        <button type="button" class="empty-reset" data-action="clear-inventory-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          Clear search
+        </button>
+      </div>`;
+  }
+
+  const visible = list.slice(0, INVENTORY_SHOWN);
+  const hasMore = total > INVENTORY_SHOWN;
+  const remaining = total - INVENTORY_SHOWN;
+
+  return `
+    <div class="table-wrap"><table>
+      <thead><tr>
+        <th class="sortable ${INVENTORY_SORT === 'name' ? 'active' : ''}" data-action="sort-inventory" data-sort="name">Product <span class="sort-icon">${sortIcon('name')}</span></th>
+        <th class="sortable ${INVENTORY_SORT === 'price' ? 'active' : ''}" data-action="sort-inventory" data-sort="price">Price <span class="sort-icon">${sortIcon('price')}</span></th>
+        <th class="sortable ${INVENTORY_SORT === 'stock' ? 'active' : ''}" data-action="sort-inventory" data-sort="stock">Stock <span class="sort-icon">${sortIcon('stock')}</span></th>
+        <th>Colours</th>
+        <th>Favourites</th>
+        <th style="text-align:right">Actions</th>
+      </tr></thead>
+      <tbody>
+        ${visible.map(renderInventoryRow).join('')}
+      </tbody>
+    </table></div>
+    ${hasMore ? `
+      <div class="inv-more-wrap">
+        <button class="btn btn-ghost btn-sm" data-action="show-more-inventory">
+          Show ${Math.min(INVENTORY_PAGE_SIZE, remaining)} more
+          <span class="inv-more-count">${remaining} remaining</span>
+        </button>
+      </div>
+    ` : ''}
+  `;
+}
+
+function updateInventoryTable(){
+  const container = document.getElementById('invTableContainer');
+  if(!container) return;
+  container.innerHTML = renderInventoryTableInner();
+
+  const countEl = document.getElementById('invCount');
+  if(countEl){
+    const list = getInventoryList();
+    const n = list.length;
+    const q = INVENTORY_QUERY.trim();
+    countEl.textContent = q
+      ? `${n} match${n === 1 ? '' : 'es'}`
+      : `${n} product${n === 1 ? '' : 's'}`;
+  }
+
+  updateSaveBar();
 }
 
 /* =========================================================================
@@ -1242,40 +1540,35 @@ function AuthScreen(forceReset){
   <div class="auth-wrap"><div class="auth-card">
     <div class="auth-logo">${logoMarkup()}</div>
     <h1>${isReset ? 'Set new password' : 'Anchal Owner'}</h1>
-    <p class="sub">${isReset ? 'Choose a new password for your account.' : 'Sign in to manage your shop and see live favourites.'}</p>
-
+    <p class="sub">${isReset ? 'Choose a new password.' : 'Sign in to manage your catalogue.'}</p>
     ${showTabs ? `
       <div class="auth-tabs">
         <button class="auth-tab ${authTab === 'signin' ? 'active' : ''}" data-action="auth-tab" data-tab="signin">Sign In</button>
         <button class="auth-tab ${authTab === 'signup' ? 'active' : ''}" data-action="auth-tab" data-tab="signup">Create Account</button>
-      </div>
-    ` : ''}
-
+      </div>` : ''}
     ${authMsg ? `<div class="form-msg ${authMsg.type}">${escapeHtml(authMsg.text)}</div>` : ''}
-
     ${isReset ? `
       <form class="auth-form" data-form="set-new-password">
-        <div class="field"><label>New password</label><input name="password" type="password" minlength="8" placeholder="At least 8 characters" required autocomplete="new-password" /></div>
-        <div class="field"><label>Confirm password</label><input name="confirm" type="password" minlength="8" placeholder="Type it again" required autocomplete="new-password" /></div>
+        <div class="field"><label>New password</label><input name="password" type="password" minlength="8" required /></div>
+        <div class="field"><label>Confirm password</label><input name="confirm" type="password" minlength="8" required /></div>
         <button type="submit" class="btn btn-primary btn-block">Save New Password</button>
       </form>
     ` : authTab === 'forgot' ? `
       <form class="auth-form" data-form="reset-password">
-        <div class="field"><label>Your email</label><input name="email" type="email" placeholder="you@example.com" required /></div>
+        <div class="field"><label>Your email</label><input name="email" type="email" required /></div>
         <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
       </form>
       <p class="auth-note"><a data-action="auth-tab" data-tab="signin">← Back to sign in</a></p>
     ` : authTab === 'signup' ? `
       <form class="auth-form" data-form="signup">
-        <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required autocomplete="email" /></div>
-        <div class="field"><label>Create password</label><input name="password" type="password" minlength="8" placeholder="At least 8 characters" required autocomplete="new-password" /></div>
+        <div class="field"><label>Email</label><input name="email" type="email" required /></div>
+        <div class="field"><label>Create password</label><input name="password" type="password" minlength="8" required /></div>
         <button type="submit" class="btn btn-primary btn-block">Create Owner Account</button>
       </form>
-      <p class="auth-note">Already have an account? <a data-action="auth-tab" data-tab="signin">Sign in</a></p>
     ` : `
       <form class="auth-form" data-form="signin">
-        <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" required autocomplete="email" /></div>
-        <div class="field"><label>Password</label><input name="password" type="password" placeholder="Your password" required autocomplete="current-password" /></div>
+        <div class="field"><label>Email</label><input name="email" type="email" required /></div>
+        <div class="field"><label>Password</label><input name="password" type="password" required /></div>
         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
       </form>
       <p class="auth-note"><a data-action="auth-tab" data-tab="forgot">Forgot your password?</a></p>
@@ -1283,103 +1576,138 @@ function AuthScreen(forceReset){
   </div></div>`;
 }
 
+/* =========================================================================
+   FORM PIECES
+   ========================================================================= */
+function productTypeSelector(selected){
+  return `
+    <div class="type-selector">
+      ${PRODUCT_TYPES.map(t => `
+        <button type="button"
+                class="type-btn ${selected === t.value ? 'active' : ''}"
+                data-action="pick-type" data-type="${t.value}">
+          ${t.label}
+        </button>
+      `).join('')}
+    </div>`;
+}
+
+function sizeChips(selected){
+  const arr = Array.isArray(selected) ? selected : [];
+  return `
+    <div class="size-chips">
+      ${SIZE_OPTIONS.map(sz => `
+        <label class="size-chip ${arr.includes(sz) ? 'active' : ''}">
+          <input type="checkbox" name="sizes" value="${sz}" ${arr.includes(sz) ? 'checked' : ''} data-action="toggle-size-chip" />
+          ${sz}
+        </label>
+      `).join('')}
+    </div>`;
+}
+
+/* =========================================================================
+   EDIT MODAL — product type locked, no stock field
+   ========================================================================= */
 function EditModal(){
   const s = findSaree(EDITING_ID);
   if(!s) return '';
-  const palettes = [
-    { name:'Rose', c1:'#8C2342', c2:'#4A0F23', gold:'#D9B96A' },
-    { name:'Ocean', c1:'#1F5C7A', c2:'#0C2C40', gold:'#E0C170' },
-    { name:'Blush', c1:'#E8A0AE', c2:'#C2707F', gold:'#C9A961' },
-    { name:'Ivory', c1:'#F1E5D5', c2:'#D8C3A5', gold:'#B98D4E' },
-    { name:'Emerald', c1:'#1F5C4A', c2:'#0D3227', gold:'#D4B45F' },
-    { name:'Mustard', c1:'#D9A441', c2:'#A9761C', gold:'#8C5E12' },
-    { name:'Sage', c1:'#93AE93', c2:'#63836A', gold:'#C9A961' },
-    { name:'Rani', c1:'#D6336C', c2:'#8E1B45', gold:'#E8C87A' },
-    { name:'Lavender', c1:'#9B8AC4', c2:'#65569B', gold:'#D8C48A' },
-    { name:'Teal', c1:'#0F7A7A', c2:'#064A4A', gold:'#D9B96A' }
-  ];
-  const currentPal = (s.palette && s.palette[0]) ? s.palette : [palettes[0].c1, palettes[0].c2];
-  const currentGold = s.gold || palettes[0].gold;
-
-    const svgFallback = sareeArt(s);
-  const photoMarkup = EDITING_FILE_URL
-    ? `<img src="${EDITING_FILE_URL}" alt="" />`
-    : EDITING_REMOVE
-      ? svgFallback
-      : s.image_url
-        ? `<img src="${escapeHtml(s.image_url)}" alt="" />`
-        : svgFallback;
+  const currentType = s.product_type || 'saree';
+  const currentSizes = Array.isArray(s.sizes) ? s.sizes : [];
+  const isSaree = currentType === 'saree';
 
   return `
   <div class="modal-overlay" data-action="modal-backdrop">
     <div class="modal">
       <div class="modal-head">
-        <h2><span class="dot"></span>Edit Saree</h2>
-        <button class="modal-close" data-action="close-edit" title="Close">
+        <h2><span class="dot"></span>Edit Product</h2>
+        <button class="modal-close" data-action="close-edit">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
       </div>
       <div class="modal-body">
         <form data-form="edit-saree" id="editSareeForm" class="add-form">
           <input type="hidden" name="id" value="${s.id}" />
+          <input type="hidden" name="product_type" id="editProductType" value="${escapeHtml(currentType)}" />
 
           <div class="field full">
-            <label>Current Photo</label>
-            <div class="photo-field">
-              <div class="photo-preview" id="editPhotoPreview">${photoMarkup}</div>
-              <div class="photo-actions">
-                <label class="file-btn">
-                  📷 ${(s.image_url && !EDITING_REMOVE) ? 'Change photo' : 'Choose a photo'}
-                  <input type="file" accept="image/*" id="editPhotoInput" style="display:none" />
-                </label>
-                <p class="hint">${(s.image_url && !EDITING_REMOVE) ? 'Selecting a new file will replace the current photo when you save.' : 'Upload a JPG, PNG or WebP (3:4 works best).'}</p>
-                ${(s.image_url && !EDITING_REMOVE) ? `<button type="button" class="remove-photo" data-action="stage-remove-photo">Remove photo</button>` : ''}
-                ${EDITING_REMOVE ? `<div style="font-size:.76rem;color:var(--red)">Photo will be removed when you save. <button type="button" class="row-undo" data-action="cancel-remove-photo" style="margin-left:6px">Undo</button></div>` : ''}
-              </div>
+            <label>Product ID (auto-assigned)</label>
+            <input type="text" class="code-readonly" value="${escapeHtml(s.code || '—')}" readonly />
+          </div>
+
+          <div class="field full">
+            <label>Product Type</label>
+            <div class="type-locked">
+              <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="10" width="16" height="10" rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+              <span class="lbl">${escapeHtml(productTypeLabel(currentType))}</span>
+              <span class="tag-readonly">Locked</span>
+            </div>
+            <p class="type-locked-hint">Product type cannot be changed after creation. If you need a different type, create a new product.</p>
+          </div>
+
+          <div class="field full" data-form-extras>
+            <div data-blouse-wrap style="${isSaree ? '' : 'display:none'}">
+              <label>Blouse</label>
+              <input name="blouse" type="text" value="${escapeHtml(s.blouse || '')}" placeholder="Unstitched blouse piece included" />
+            </div>
+            <div data-sizes-wrap style="${isSaree ? 'display:none' : ''};margin-top:14px">
+              <label>Available Sizes</label>
+              ${sizeChips(currentSizes)}
             </div>
           </div>
 
-                    <div class="field full">
-            <label>Saree ID (auto-assigned, read-only)</label>
-            <input type="text" class="code-readonly" value="${escapeHtml(s.code || '—')}" readonly />
-          </div>
           <div class="field"><label>Name *</label><input name="name" type="text" value="${escapeHtml(s.name)}" required /></div>
-          <div class="field"><label>Category *</label><input name="category" type="text" value="${escapeHtml(s.category)}" list="catList" required />
-            <datalist id="catList">${Array.from(new Set(SAREES.map(x => x.category))).map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
+          <div class="field"><label>Category *</label><input name="category" type="text" value="${escapeHtml(s.category)}" list="catListEdit" required />
+            <datalist id="catListEdit">${Array.from(new Set(SAREES.map(x => x.category))).map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
           </div>
           <div class="field"><label>Fabric *</label><input name="fabric" type="text" value="${escapeHtml(s.fabric)}" required /></div>
           <div class="field"><label>Weave / Origin</label><input name="weave" type="text" value="${escapeHtml(s.weave || '')}" /></div>
           <div class="field"><label>Price (₹) *</label><input name="price" type="number" min="0" value="${s.price}" required /></div>
           <div class="field"><label>MRP (₹) *</label><input name="mrp" type="number" min="0" value="${s.mrp}" required /></div>
-          <div class="field"><label>Stock *</label><input name="stock" type="number" min="0" value="${s.stock}" required /></div>
           <div class="field"><label>Rating</label><input name="rating" type="number" min="1" max="5" step="0.1" value="${s.rating}" /></div>
           <div class="field"><label>Best For</label><input name="occasion" type="text" value="${escapeHtml(s.occasion || '')}" /></div>
-          <div class="field"><label>Blouse</label><input name="blouse" type="text" value="${escapeHtml(s.blouse || '')}" /></div>
           <div class="field"><label>Care</label><input name="care" type="text" value="${escapeHtml(s.care || '')}" /></div>
           <div class="field"><label>Badge</label><input name="tag" type="text" value="${escapeHtml(s.tag || '')}" /></div>
           <div class="field full"><label>Description *</label><textarea name="description" required>${escapeHtml(s.description || '')}</textarea></div>
 
           <div class="field full">
-            <label>Colour Palette (used only if no photo)</label>
-            <div class="palette-picker">
-              ${palettes.map(opt => {
-                const active = currentPal[0] === opt.c1 && currentPal[1] === opt.c2;
-                return `<button type="button" class="palette-swatch ${active ? 'active' : ''}" data-action="pick-edit-palette" data-c1="${opt.c1}" data-c2="${opt.c2}" data-gold="${opt.gold}" style="--c1:${opt.c1};--c2:${opt.c2}" title="${opt.name}"></button>`;
+            <label>Photos &amp; Colours</label>
+            <p class="image-hint">Each photo becomes a colour variant. Colour is auto-detected from the image — you can rename it below.</p>
+            ${renderImagesBlock(EDIT_IMAGES, 'edit')}
+          </div>
+
+          <div class="field full">
+            <label>Colour Palette (used only if no photos)</label>
+            <div class="palette-picker" data-palette-edit>
+              ${[
+                ['#8C2342','#4A0F23','#D9B96A','Rose'],
+                ['#1F5C7A','#0C2C40','#E0C170','Ocean'],
+                ['#E8A0AE','#C2707F','#C9A961','Blush'],
+                ['#1F5C4A','#0D3227','#D4B45F','Emerald'],
+                ['#D9A441','#A9761C','#8C5E12','Mustard'],
+                ['#0F7A7A','#064A4A','#D9B96A','Teal']
+              ].map(([c1,c2,gold,label], i) => {
+                const pal = Array.isArray(s.palette) ? s.palette : [];
+                const active = (pal[0] === c1 && pal[1] === c2) || (i === 0 && !pal[0]);
+                return `<button type="button" class="palette-swatch ${active ? 'active' : ''}" data-action="pick-edit-palette" data-c1="${c1}" data-c2="${c2}" data-gold="${gold}" style="--c1:${c1};--c2:${c2}" title="${label}"></button>`;
               }).join('')}
             </div>
-            <input type="hidden" name="c1" id="epC1" value="${currentPal[0]}" />
-            <input type="hidden" name="c2" id="epC2" value="${currentPal[1]}" />
-            <input type="hidden" name="gold" id="epGold" value="${currentGold}" />
+            <input type="hidden" name="c1" id="epC1" value="${(Array.isArray(s.palette) && s.palette[0]) || '#8C2342'}" />
+            <input type="hidden" name="c2" id="epC2" value="${(Array.isArray(s.palette) && s.palette[1]) || '#4A0F23'}" />
+            <input type="hidden" name="gold" id="epGold" value="${s.gold || '#D9B96A'}" />
           </div>
         </form>
       </div>
       <div class="modal-foot">
-                <button type="button" class="btn btn-ghost" data-action="close-edit">Cancel</button>
+        <button type="button" class="btn btn-ghost" data-action="close-edit">Cancel</button>
         <button type="button" class="btn btn-primary" data-action="save-edit">Save Changes</button>
       </div>
     </div>
   </div>`;
 }
+
 /* =========================================================================
    DASHBOARD
    ========================================================================= */
@@ -1392,17 +1720,15 @@ function Dashboard(){
   const topProduct = ranked[0] && (FAVOURITE_COUNTS[ranked[0].id] || 0) > 0 ? ranked[0] : null;
 
   const palettes = [
-    { name:'Rose', c1:'#8C2342', c2:'#4A0F23', gold:'#D9B96A' },
-    { name:'Ocean', c1:'#1F5C7A', c2:'#0C2C40', gold:'#E0C170' },
-    { name:'Blush', c1:'#E8A0AE', c2:'#C2707F', gold:'#C9A961' },
-    { name:'Ivory', c1:'#F1E5D5', c2:'#D8C3A5', gold:'#B98D4E' },
-    { name:'Emerald', c1:'#1F5C4A', c2:'#0D3227', gold:'#D4B45F' },
-    { name:'Mustard', c1:'#D9A441', c2:'#A9761C', gold:'#8C5E12' },
-    { name:'Sage', c1:'#93AE93', c2:'#63836A', gold:'#C9A961' },
-    { name:'Rani', c1:'#D6336C', c2:'#8E1B45', gold:'#E8C87A' },
-    { name:'Lavender', c1:'#9B8AC4', c2:'#65569B', gold:'#D8C48A' },
-    { name:'Teal', c1:'#0F7A7A', c2:'#064A4A', gold:'#D9B96A' }
+    ['#8C2342','#4A0F23','#D9B96A','Rose'],
+    ['#1F5C7A','#0C2C40','#E0C170','Ocean'],
+    ['#E8A0AE','#C2707F','#C9A961','Blush'],
+    ['#1F5C4A','#0D3227','#D4B45F','Emerald'],
+    ['#D9A441','#A9761C','#8C5E12','Mustard'],
+    ['#0F7A7A','#064A4A','#D9B96A','Teal']
   ];
+
+  const invCountNow = getInventoryList().length;
 
   return `
   <div class="topbar"><div class="container inner">
@@ -1412,7 +1738,7 @@ function Dashboard(){
       Live · ${escapeHtml(SESSION?.user?.email || '')}
     </div>
     <div class="actions">
-      <a href="https://anchal-clothing1.vercel.app/" target="_blank" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)">View Store ↗</a>
+      <a href="https://anchal-store2.vercel.app/" target="_blank" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)">View Store ↗</a>
       <button class="btn btn-danger btn-sm" data-action="signout">Sign out</button>
     </div>
   </div></div>
@@ -1422,7 +1748,7 @@ function Dashboard(){
     <div class="stats">
       <div class="stat-card">
         <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg></div>
-        <div class="lbl">Total Sarees</div>
+        <div class="lbl">Total Products</div>
         <div class="val">${totalSarees}</div>
         <div class="subl">${inStock} in stock · ${outStock} out</div>
       </div>
@@ -1457,7 +1783,7 @@ function Dashboard(){
     <div class="charts-grid">
       <div class="chart-card">
         <h2><span class="dot"></span>Favourites — Leaderboard</h2>
-        <p class="sub">Which sarees are being saved most.</p>
+        <p class="sub">Which products are being saved most.</p>
         ${renderFavouritesChart()}
       </div>
       <div class="chart-card">
@@ -1466,105 +1792,84 @@ function Dashboard(){
         ${renderStockDonut()}
       </div>
     </div>
-        <div class="panel">
+
+    <div class="panel">
       <h2><span class="dot"></span>Activity Timeline</h2>
-      <p class="sub">Live feed of favourites, removals and WhatsApp enquiries — most recent first.</p>
+      <p class="sub">Live feed of favourites, removals and WhatsApp enquiries.</p>
       ${renderTimeline()}
     </div>
 
-        <div class="panel">
-      <h2><span class="dot"></span>Manage Inventory</h2>
-      <p class="sub">Edit stock or delete sarees, then click Save to apply changes.</p>
-            <div style="margin-bottom:16px">
-        <input type="search" id="inventorySearch" placeholder="Search by name, ID or fabric…" style="width:100%;max-width:340px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;outline:none;font-size:15px;min-height:42px" />
+    <div class="panel">
+      <h2><span class="dot"></span>Manage Inventory <span class="inv-count" id="invCount">${invCountNow} product${invCountNow === 1 ? '' : 's'}</span></h2>
+      <p class="sub">Edit stock or delete products, then click Save to apply changes.</p>
+      <div style="margin-bottom:16px">
+        <input type="search" id="inventorySearch" value="${escapeHtml(INVENTORY_QUERY)}" placeholder="Search by name, ID or fabric…" style="width:100%;max-width:340px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;outline:none;font-size:15px;min-height:42px" />
       </div>
-            <div class="save-bar" id="saveBar" style="display:none">
+      <div class="save-bar" id="saveBar" style="display:none">
         <span class="msg" id="saveMsg">● 0 unsaved changes</span>
         <div class="actions">
           <button class="btn btn-ghost btn-sm" data-action="discard-changes">Discard</button>
           <button class="btn btn-primary btn-sm" id="saveBtn" data-action="save-changes">Save changes</button>
         </div>
       </div>
-      ${SAREES.length ? `<div class="table-wrap"><table>
-        <thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Favourites</th><th style="text-align:right">Actions</th></tr></thead>
-        <tbody>
-                    ${SAREES.map(s => {
-            const c = FAVOURITE_COUNTS[s.id] || 0;
-            const staged = PENDING.stock[s.id];
-            const displayStock = staged !== undefined ? staged : s.stock;
-            const isStagedDelete = PENDING.deletes.has(s.id);
-            const dirty = staged !== undefined;
-            const stClass = displayStock <= 0 ? 'out' : displayStock <= 5 ? 'low' : '';
-            return `<tr class="${isStagedDelete ? 'staged-delete' : ''}">
-              <td><div class="tbl-product">
-                                <div class="tbl-thumb">${s.image_url ? `<img src="${escapeHtml(s.image_url)}" alt="" style="width:100%;height:100%;object-fit:cover" />` : sareeArt(s)}</div>
-                                <div class="tbl-info">
-                  <strong>${escapeHtml(s.name)}</strong>
-                  <span>${s.code ? `<span class="code-tag">${escapeHtml(s.code)}</span>` : ''}${escapeHtml(s.category)} · ${escapeHtml(s.fabric)}</span>
-                </div>
-              </div></td>
-              <td><b>${money(s.price)}</b></td>
-              <td><input class="stock-input ${stClass} ${dirty ? 'dirty' : ''}" type="number" min="0" value="${displayStock}" data-action="update-stock" data-id="${s.id}" ${isStagedDelete ? 'disabled' : ''} /></td>
-              <td><div class="fav-cell ${c === 0 ? 'zero' : ''}">${c > 0 ? `<span class="heart-ic">♥</span> ${c}` : `<span class="untouched-pill">None</span>`}</div></td>
-                            <td><div class="row-actions">
-                ${isStagedDelete
-                  ? `<button class="row-undo" data-action="undo-delete" data-id="${s.id}">Undo</button>`
-                  : `<button class="icon-btn edit" data-action="edit-saree" data-id="${s.id}" title="Edit">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                    </button>
-                    <button class="icon-btn" data-action="delete-saree" data-id="${s.id}" title="Delete">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg>
-                    </button>`}
-              </div></td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table></div>` : `<p style="color:var(--muted);font-size:.88rem">No sarees yet — add one below.</p>`}
+      <div id="invTableContainer">
+        ${renderInventoryTableInner()}
+      </div>
     </div>
 
     <div class="panel">
-      <h2><span class="dot"></span>Add a New Saree</h2>
-      <p class="sub">New sarees appear on the public shop instantly.</p>
-      <form data-form="add-saree" class="add-form">
+      <h2><span class="dot"></span>Add a New Product</h2>
+      <p class="sub">New products appear on the public shop instantly.</p>
+      <form data-form="add-saree" class="add-form" id="addForm">
+        <input type="hidden" name="product_type" id="addProductType" value="saree" />
+
+        <div class="field full">
+          <label>Product Type *</label>
+          ${productTypeSelector('saree')}
+        </div>
+
+        <div class="field full" data-form-extras>
+          <div data-blouse-wrap>
+            <label>Blouse</label>
+            <input name="blouse" type="text" placeholder="Unstitched blouse piece included" />
+          </div>
+          <div data-sizes-wrap style="margin-top:14px">
+            <label>Available Sizes</label>
+            ${sizeChips([])}
+          </div>
+        </div>
+
         <div class="field"><label>Name *</label><input name="name" type="text" placeholder="e.g. Rosewood Kanjivaram" required /></div>
-        <div class="field"><label>Category *</label><input name="category" type="text" placeholder="e.g. Kanjivaram" list="catList" required />
-          <datalist id="catList">${Array.from(new Set(SAREES.map(s => s.category))).map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
+        <div class="field"><label>Category *</label><input name="category" type="text" placeholder="e.g. Kanjivaram" list="catListAdd" required />
+          <datalist id="catListAdd">${Array.from(new Set(SAREES.map(s => s.category))).map(c => `<option value="${escapeHtml(c)}">`).join('')}</datalist>
         </div>
         <div class="field"><label>Fabric *</label><input name="fabric" type="text" placeholder="e.g. Pure Mulberry Silk" required /></div>
         <div class="field"><label>Weave / Origin</label><input name="weave" type="text" placeholder="e.g. Handwoven in Kanchipuram" /></div>
         <div class="field"><label>Price (₹) *</label><input name="price" type="number" min="0" required /></div>
         <div class="field"><label>MRP (₹) *</label><input name="mrp" type="number" min="0" required /></div>
         <div class="field"><label>Stock *</label><input name="stock" type="number" min="0" required /></div>
-        <div class="field"><label>Starting Rating</label><input name="rating" type="number" min="1" max="5" step="0.1" value="4.5" /></div>
+        <div class="field"><label>Rating</label><input name="rating" type="number" min="1" max="5" step="0.1" value="4.5" /></div>
         <div class="field"><label>Best For</label><input name="occasion" type="text" placeholder="Wedding, Festive" /></div>
-        <div class="field"><label>Blouse</label><input name="blouse" type="text" placeholder="Unstitched blouse piece included" /></div>
         <div class="field"><label>Care</label><input name="care" type="text" placeholder="Dry clean only" /></div>
         <div class="field"><label>Badge</label><input name="tag" type="text" placeholder="New / Bestseller / Bridal" /></div>
-        <div class="field full"><label>Description *</label><textarea name="description" placeholder="Describe the saree…" required></textarea></div>
-                <div class="field full">
-          <label>Saree Photo (optional)</label>
-          <div class="photo-field">
-            <div class="photo-preview" id="addPhotoPreview">No photo yet —<br>SVG art will be used</div>
-            <div class="photo-actions">
-              <label class="file-btn">
-                📷 Choose a photo
-                <input type="file" accept="image/*" id="addPhotoInput" style="display:none" />
-              </label>
-              <p class="hint">JPG, PNG or WebP. Best at 600×800 or larger (3:4). Max 5 MB.</p>
-              <button type="button" class="remove-photo" id="addPhotoClear" data-action="clear-add-photo" style="display:none">Remove</button>
-            </div>
-          </div>
-        </div>
+        <div class="field full"><label>Description *</label><textarea name="description" placeholder="Describe the product…" required></textarea></div>
+
         <div class="field full">
-          <label>Colour Palette *</label>
-          <div class="palette-picker">
-            ${palettes.map((opt, i) => `<button type="button" class="palette-swatch ${i === 0 ? 'active' : ''}" data-action="pick-palette" data-c1="${opt.c1}" data-c2="${opt.c2}" data-gold="${opt.gold}" style="--c1:${opt.c1};--c2:${opt.c2}" title="${opt.name}"></button>`).join('')}
-          </div>
-          <input type="hidden" name="c1" id="pC1" value="${palettes[0].c1}" />
-          <input type="hidden" name="c2" id="pC2" value="${palettes[0].c2}" />
-          <input type="hidden" name="gold" id="pGold" value="${palettes[0].gold}" />
+          <label>Photos &amp; Colours</label>
+          <p class="image-hint">Upload one photo per colour. The colour is auto-detected from each image — rename it if you like.</p>
+          ${renderImagesBlock(ADD_IMAGES, 'add')}
         </div>
-        <div class="field full"><button type="submit" class="btn btn-primary btn-block">+ Add Saree to Shop</button></div>
+
+        <div class="field full">
+          <label>Colour Palette (fallback if no photos)</label>
+          <div class="palette-picker" data-palette-add>
+            ${palettes.map(([c1,c2,gold,label], i) => `<button type="button" class="palette-swatch ${i === 0 ? 'active' : ''}" data-action="pick-palette" data-c1="${c1}" data-c2="${c2}" data-gold="${gold}" style="--c1:${c1};--c2:${c2}" title="${label}"></button>`).join('')}
+          </div>
+          <input type="hidden" name="c1" id="pC1" value="#8C2342" />
+          <input type="hidden" name="c2" id="pC2" value="#4A0F23" />
+          <input type="hidden" name="gold" id="pGold" value="#D9B96A" />
+        </div>
+        <div class="field full"><button type="submit" class="btn btn-primary btn-block">+ Add Product</button></div>
       </form>
     </div>
 
@@ -1572,13 +1877,13 @@ function Dashboard(){
       <h2><span class="dot"></span>Account</h2>
       <p class="sub">Signed in as <b>${escapeHtml(SESSION?.user?.email || '')}</b></p>
       <form data-form="change-password" style="max-width:420px">
-        <div class="field"><label>New password</label><input name="password" type="password" minlength="8" placeholder="At least 8 characters" required autocomplete="new-password" /></div>
-        <div class="field"><label>Confirm new password</label><input name="confirm" type="password" minlength="8" placeholder="Type it again" required autocomplete="new-password" /></div>
+        <div class="field"><label>New password</label><input name="password" type="password" minlength="8" required /></div>
+        <div class="field"><label>Confirm new password</label><input name="confirm" type="password" minlength="8" required /></div>
         <button type="submit" class="btn btn-ghost">Update Password</button>
       </form>
     </div>
 
-    </div></div>
+  </div></div>
   ${EDITING_ID ? EditModal() : ''}`;
 }
 
@@ -1589,8 +1894,8 @@ function stageStock(id, value){
   const stock = Math.max(0, parseInt(value) || 0);
   const s = findSaree(id);
   if(!s) return;
-  if(stock === s.stock){ delete PENDING.stock[id]; }
-  else { PENDING.stock[id] = stock; }
+  if(stock === s.stock) delete PENDING.stock[id];
+  else PENDING.stock[id] = stock;
   const input = document.querySelector(`.stock-input[data-id="${id}"]`);
   if(input){
     input.classList.remove('low','out','dirty');
@@ -1600,7 +1905,6 @@ function stageStock(id, value){
   }
   updateSaveBar();
 }
-
 function stageDelete(id){
   const s = findSaree(id);
   if(!s) return;
@@ -1608,54 +1912,21 @@ function stageDelete(id){
   PENDING.deletes.add(id);
   render();
 }
-
-function unstageDelete(id){
-  PENDING.deletes.delete(id);
-  render();
+function unstageDelete(id){ PENDING.deletes.delete(id); render(); }
+function hasPendingChanges(){ return Object.keys(PENDING.stock).length > 0 || PENDING.deletes.size > 0; }
+function updateSaveBar(){
+  const bar = document.getElementById('saveBar');
+  if(!bar) return;
+  const n = Object.keys(PENDING.stock).length + PENDING.deletes.size;
+  const msg = document.getElementById('saveMsg');
+  if(msg) msg.textContent = `● ${n} unsaved change${n === 1 ? '' : 's'}`;
+  bar.style.display = n > 0 ? 'flex' : 'none';
 }
-
-async function uploadSareePhoto(file){
-  // Resize in-browser first — max 1200px, JPEG 0.85 quality
-  const resized = await new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => {
-      const MAX = 1200;
-      let { width, height } = img;
-      if(width > MAX){ height = Math.round(height * MAX / width); width = MAX; }
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-      canvas.toBlob(b => resolve(b), 'image/jpeg', 0.85);
-    };
-    img.src = URL.createObjectURL(file);
-  });
-
-  const path = `sarees/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
-  const { error } = await sb.storage.from('saree-images').upload(path, resized, {
-    cacheControl: '3600', upsert: false, contentType: 'image/jpeg'
-  });
-  if(error) throw error;
-  const { data } = sb.storage.from('saree-images').getPublicUrl(path);
-  return data.publicUrl;
-}
-
-async function deleteSareePhotoByUrl(url){
-  if(!url) return;
-  try{
-    const marker = '/saree-images/';
-    const idx = url.indexOf(marker);
-    if(idx === -1) return;
-    const path = url.slice(idx + marker.length);
-    await sb.storage.from('saree-images').remove([path]);
-  }catch(e){ /* non-fatal */ }
-}
-
 async function savePendingChanges(){
   if(!SESSION) return;
   const btn = document.getElementById('saveBtn');
   if(btn){ btn.disabled = true; btn.textContent = 'Saving…'; }
-  try {
+  try{
     for(const [id, stock] of Object.entries(PENDING.stock)){
       const { error } = await sb.from('sarees').update({ stock }).eq('id', id);
       if(error) throw error;
@@ -1675,69 +1946,95 @@ async function savePendingChanges(){
     if(btn){ btn.disabled = false; btn.textContent = 'Save changes'; }
   }
 }
-
 function discardPendingChanges(){
   if(!confirm('Discard all unsaved changes?')) return;
   PENDING = { stock:{}, deletes:new Set() };
   render();
 }
 
-function hasPendingChanges(){
-  return Object.keys(PENDING.stock).length > 0 || PENDING.deletes.size > 0;
+async function uploadSareePhoto(file){
+  const resized = await new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 1200;
+      let { width, height } = img;
+      if(width > MAX){ height = Math.round(height * MAX / width); width = MAX; }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      canvas.toBlob(b => resolve(b), 'image/jpeg', 0.85);
+    };
+    img.src = URL.createObjectURL(file);
+  });
+  const path = `sarees/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+  const { error } = await sb.storage.from('saree-images').upload(path, resized, {
+    cacheControl:'3600', upsert:false, contentType:'image/jpeg'
+  });
+  if(error) throw error;
+  const { data } = sb.storage.from('saree-images').getPublicUrl(path);
+  return data.publicUrl;
 }
 
-function updateSaveBar(){
-  const bar = document.getElementById('saveBar');
-  if(!bar) return;
-  const n = Object.keys(PENDING.stock).length + PENDING.deletes.size;
-  const msg = document.getElementById('saveMsg');
-  if(msg) msg.textContent = `● ${n} unsaved change${n === 1 ? '' : 's'}`;
-  bar.style.display = n > 0 ? 'flex' : 'none';
+async function deleteSareePhotoByUrl(url){
+  if(!url) return;
+  try{
+    const marker = '/saree-images/';
+    const idx = url.indexOf(marker);
+    if(idx === -1) return;
+    const path = url.slice(idx + marker.length);
+    await sb.storage.from('saree-images').remove([path]);
+  }catch(e){}
 }
+
+function getSelectedSizesFromForm(form){
+  return Array.from(form.querySelectorAll('input[name="sizes"]:checked')).map(x => x.value);
+}
+
 async function addSaree(form){
   if(!SESSION) return;
   const fd = new FormData(form);
+  const product_type = fd.get('product_type') || 'saree';
+  const sizes = getSelectedSizesFromForm(form);
+
+  if(!fd.get('name') || !fd.get('category') || !fd.get('fabric')){
+    toast('Name, category and fabric are required', 'error'); return;
+  }
+
+  const imagesArr = await uploadAllImages(ADD_IMAGES);
+
   const row = {
-    name: (fd.get('name') || '').toString().trim(),
-    category: (fd.get('category') || '').toString().trim(),
-    fabric: (fd.get('fabric') || '').toString().trim(),
-    weave: (fd.get('weave') || 'Handwoven').toString().trim(),
+    name: String(fd.get('name')).trim(),
+    category: String(fd.get('category')).trim(),
+    fabric: String(fd.get('fabric')).trim(),
+    weave: String(fd.get('weave') || 'Handwoven').trim(),
     price: Math.max(0, parseInt(fd.get('price')) || 0),
     mrp: Math.max(0, parseInt(fd.get('mrp')) || 0),
     stock: Math.max(0, parseInt(fd.get('stock')) || 0),
     rating: Math.min(5, Math.max(1, parseFloat(fd.get('rating')) || 4.5)),
-    palette: [fd.get('c1'), fd.get('c2')],
-    gold: fd.get('gold'),
-    tag: (fd.get('tag') || '').toString().trim(),
-    description: (fd.get('description') || '').toString().trim(),
-    occasion: (fd.get('occasion') || 'Festive').toString().trim(),
-    blouse: (fd.get('blouse') || 'Unstitched blouse piece included').toString().trim(),
-    care: (fd.get('care') || 'Dry clean only').toString().trim()
+    palette: [fd.get('c1') || '#8C2342', fd.get('c2') || '#4A0F23'],
+    gold: fd.get('gold') || '#D9B96A',
+    tag: String(fd.get('tag') || '').trim(),
+    description: String(fd.get('description') || '').trim(),
+    occasion: String(fd.get('occasion') || 'Festive').trim(),
+    blouse: String(fd.get('blouse') || 'Unstitched blouse piece included').trim(),
+    care: String(fd.get('care') || 'Dry clean only').trim(),
+    product_type,
+    sizes,
+    images: imagesArr,
+    image_url: imagesArr[0]?.url || null
   };
-  if(!row.name || !row.category || !row.fabric){ toast('Name, category and fabric are required', 'error'); return; }
-
-  // Upload photo first (if any)
-  if(ADD_FILE){
-    try {
-      row.image_url = await uploadSareePhoto(ADD_FILE);
-    } catch(err){
-      toast('Photo upload failed: ' + (err.message || 'unknown'), 'error');
-      return;
-    }
-  }
 
   const { error } = await sb.from('sarees').insert(row);
   if(error){
-    // Clean up the uploaded photo if the insert failed
-    if(row.image_url) await deleteSareePhotoByUrl(row.image_url);
-    toast(error.message, 'error');
-    return;
+    for(const img of imagesArr) await deleteSareePhotoByUrl(img.url);
+    toast(error.message, 'error'); return;
   }
 
-  ADD_FILE = null;
+  ADD_IMAGES.forEach(x => { if(x.previewUrl) URL.revokeObjectURL(x.previewUrl); });
+  ADD_IMAGES = [];
   await loadSarees();
   render();
-  toast('✓ Saree added to shop', 'success');
+  toast('✓ Product added to shop', 'success');
 }
 
 async function saveEditedSaree(form){
@@ -1747,63 +2044,56 @@ async function saveEditedSaree(form){
   const original = findSaree(id);
   if(!original) return;
 
+  // Product type is locked — always use the original value
+  const product_type = original.product_type || 'saree';
+  const sizes = getSelectedSizesFromForm(form);
+
+  const finalImages = await uploadAllImages(EDIT_IMAGES);
+
+  const oldUrls = (Array.isArray(original.images) ? original.images.map(x => x.url) : []).filter(Boolean);
+  const newUrls = finalImages.map(x => x.url);
+  for(const oldUrl of oldUrls){
+    if(!newUrls.includes(oldUrl)){
+      await deleteSareePhotoByUrl(oldUrl);
+    }
+  }
+  if(original.image_url && !newUrls.includes(original.image_url)){
+    await deleteSareePhotoByUrl(original.image_url);
+  }
+
+  // NOTE: stock is intentionally NOT included here — it's managed from the Inventory table only
   const updates = {
-    name: (fd.get('name') || '').toString().trim(),
-    category: (fd.get('category') || '').toString().trim(),
-    fabric: (fd.get('fabric') || '').toString().trim(),
-    weave: (fd.get('weave') || 'Handwoven').toString().trim(),
+    name: String(fd.get('name')).trim(),
+    category: String(fd.get('category')).trim(),
+    fabric: String(fd.get('fabric')).trim(),
+    weave: String(fd.get('weave') || 'Handwoven').trim(),
     price: Math.max(0, parseInt(fd.get('price')) || 0),
     mrp: Math.max(0, parseInt(fd.get('mrp')) || 0),
-    stock: Math.max(0, parseInt(fd.get('stock')) || 0),
     rating: Math.min(5, Math.max(1, parseFloat(fd.get('rating')) || 4.5)),
-    palette: [fd.get('c1'), fd.get('c2')],
-    gold: fd.get('gold'),
-    tag: (fd.get('tag') || '').toString().trim(),
-    description: (fd.get('description') || '').toString().trim(),
-    occasion: (fd.get('occasion') || 'Festive').toString().trim(),
-    blouse: (fd.get('blouse') || 'Unstitched blouse piece included').toString().trim(),
-    care: (fd.get('care') || 'Dry clean only').toString().trim()
+    palette: [fd.get('c1') || '#8C2342', fd.get('c2') || '#4A0F23'],
+    gold: fd.get('gold') || '#D9B96A',
+    tag: String(fd.get('tag') || '').trim(),
+    description: String(fd.get('description') || '').trim(),
+    occasion: String(fd.get('occasion') || 'Festive').trim(),
+    blouse: String(fd.get('blouse') || 'Unstitched blouse piece included').trim(),
+    care: String(fd.get('care') || 'Dry clean only').trim(),
+    product_type,
+    sizes,
+    images: finalImages,
+    image_url: finalImages[0]?.url || null
   };
 
-  const oldUrl = original.image_url || null;
-  let newUrl = oldUrl;
-
-  try {
-    if(EDITING_FILE){
-      // Upload the new photo first
-      newUrl = await uploadSareePhoto(EDITING_FILE);
-    } else if(EDITING_REMOVE){
-      newUrl = null;
-    }
-  } catch(err){
-    toast('Photo upload failed: ' + (err.message || 'unknown'), 'error');
-    return;
-  }
-
-  updates.image_url = newUrl;
-
   const { error } = await sb.from('sarees').update(updates).eq('id', id);
-  if(error){
-    // Roll back the newly uploaded file if the update failed
-    if(EDITING_FILE && newUrl && newUrl !== oldUrl){
-      await deleteSareePhotoByUrl(newUrl);
-    }
-    toast(error.message, 'error');
-    return;
-  }
+  if(error){ toast(error.message, 'error'); return; }
 
-  // Clean up the OLD photo if we replaced or removed it
-  if(oldUrl && oldUrl !== newUrl){
-    await deleteSareePhotoByUrl(oldUrl);
-  }
-
+  EDIT_IMAGES.forEach(x => { if(x.previewUrl) URL.revokeObjectURL(x.previewUrl); });
+  EDIT_IMAGES = [];
   EDITING_ID = null;
-  EDITING_FILE = null;
-  EDITING_REMOVE = false;
 
   await loadSarees();
+  await loadFavouriteCounts();
   render();
-  toast('✓ Saree updated', 'success');
+  toast('✓ Product updated', 'success');
 }
 
 /* =========================================================================
@@ -1811,27 +2101,14 @@ async function saveEditedSaree(form){
    ========================================================================= */
 function render(){
   const app = document.getElementById('app');
-
-  // Password reset redirect handler
   if(location.hash.includes('reset') && SESSION){
     app.innerHTML = AuthScreen(true);
     return;
   }
-
-  if(!sb){
-    app.innerHTML = `<div class="auth-wrap"><div class="auth-card">
-      <div class="auth-logo">${logoMarkup()}</div>
-      <h1>Setup required</h1>
-      <p class="sub">Please configure your Supabase URL and anon key at the top of this file.</p>
-    </div></div>`;
-    return;
-  }
-
   if(!SESSION){
     app.innerHTML = AuthScreen(false);
     return;
   }
-
   app.innerHTML = Dashboard();
   updateSaveBar();
 }
@@ -1857,70 +2134,97 @@ document.addEventListener('click', async e => {
   const el = e.target.closest('[data-action]');
   if(!el) return;
   const a = el.dataset.action;
-  if(a === 'auth-tab'){
-    authTab = el.dataset.tab;
-    authMsg = null;
-    render();
-    return;
-  }
+
+  if(a === 'auth-tab'){ authTab = el.dataset.tab; authMsg = null; render(); return; }
   if(a === 'signout'){ await signOut(); return; }
   if(a === 'delete-saree'){ stageDelete(el.dataset.id); return; }
   if(a === 'undo-delete'){ unstageDelete(el.dataset.id); return; }
   if(a === 'save-changes'){ await savePendingChanges(); return; }
   if(a === 'discard-changes'){ discardPendingChanges(); return; }
+
+  /* Product type picker — ADD FORM ONLY */
+  if(a === 'pick-type'){
+    const type = el.dataset.type;
+    const form = document.getElementById('addForm');
+    if(!form) return;
+    document.getElementById('addProductType').value = type;
+    document.querySelectorAll('#addForm .type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+    form.querySelector('[data-blouse-wrap]').style.display = type === 'saree' ? '' : 'none';
+    form.querySelector('[data-sizes-wrap]').style.display = type === 'saree' ? 'none' : '';
+    return;
+  }
+
+  if(a === 'toggle-size-chip'){
+    const label = el.closest('.size-chip');
+    if(label) label.classList.toggle('active', el.checked);
+    return;
+  }
+
   if(a === 'pick-palette'){
-    document.querySelectorAll('.palette-swatch').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('[data-palette-add] .palette-swatch').forEach(s => s.classList.remove('active'));
     el.classList.add('active');
     document.getElementById('pC1').value = el.dataset.c1;
     document.getElementById('pC2').value = el.dataset.c2;
     document.getElementById('pGold').value = el.dataset.gold;
+    return;
   }
-    if(a === 'edit-saree'){
+  if(a === 'pick-edit-palette'){
+    document.querySelectorAll('[data-palette-edit] .palette-swatch').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('epC1').value = el.dataset.c1;
+    document.getElementById('epC2').value = el.dataset.c2;
+    document.getElementById('epGold').value = el.dataset.gold;
+    return;
+  }
+
+  if(a === 'remove-image'){
+    removeImage(el.dataset.target, el.dataset.imgid);
+    return;
+  }
+
+  if(a === 'edit-saree'){
     EDITING_ID = el.dataset.id;
-    EDITING_FILE = null;
-    EDITING_REMOVE = false;
+    const s = findSaree(EDITING_ID);
+    EDIT_IMAGES = [];
+    if(s){
+      const existing = Array.isArray(s.images) ? s.images : [];
+      if(existing.length){
+        EDIT_IMAGES = existing.map((img) => ({
+          _id: makeId(),
+          file: null,
+          previewUrl: null,
+          url: img.url,
+          hex: img.hex || '#CCCCCC',
+          name: img.name || 'Colour'
+        }));
+      } else if(s.image_url){
+        EDIT_IMAGES = [{
+          _id: makeId(),
+          file: null,
+          previewUrl: null,
+          url: s.image_url,
+          hex: '#CCCCCC',
+          name: 'Colour'
+        }];
+      }
+    }
     render();
     return;
   }
   if(a === 'close-edit'){
-    if(EDITING_FILE_URL){ URL.revokeObjectURL(EDITING_FILE_URL); }
+    EDIT_IMAGES.forEach(x => { if(x.previewUrl) URL.revokeObjectURL(x.previewUrl); });
+    EDIT_IMAGES = [];
     EDITING_ID = null;
-    EDITING_FILE = null;
-    EDITING_FILE_URL = null;
-    EDITING_REMOVE = false;
     render();
     return;
   }
   if(a === 'modal-backdrop'){
     if(e.target.classList.contains('modal-overlay')){
-      if(EDITING_FILE_URL){ URL.revokeObjectURL(EDITING_FILE_URL); }
+      EDIT_IMAGES.forEach(x => { if(x.previewUrl) URL.revokeObjectURL(x.previewUrl); });
+      EDIT_IMAGES = [];
       EDITING_ID = null;
-      EDITING_FILE = null;
-      EDITING_FILE_URL = null;
-      EDITING_REMOVE = false;
       render();
     }
-    return;
-  }
-  if(a === 'stage-remove-photo'){
-    if(EDITING_FILE_URL){ URL.revokeObjectURL(EDITING_FILE_URL); }
-    EDITING_FILE = null;
-    EDITING_FILE_URL = null;
-    EDITING_REMOVE = true;
-    render();
-    return;
-  }
-  if(a === 'cancel-remove-photo'){
-    EDITING_REMOVE = false;
-    render();
-    return;
-  }
-  if(a === 'pick-edit-palette'){
-    document.querySelectorAll('#editSareeForm .palette-swatch').forEach(x => x.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('epC1').value = el.dataset.c1;
-    document.getElementById('epC2').value = el.dataset.c2;
-    document.getElementById('epGold').value = el.dataset.gold;
     return;
   }
   if(a === 'save-edit'){
@@ -1928,93 +2232,83 @@ document.addEventListener('click', async e => {
     if(!form) return;
     const btn = el;
     const original = btn.innerHTML;
-    btn.disabled = true;
-    btn.style.opacity = '.7';
-    btn.style.pointerEvents = 'none';
-    btn.innerHTML = 'Saving…';
-    try {
-      await saveEditedSaree(form);
-    } finally {
-      if(document.getElementById('app').contains(btn)){
-        btn.disabled = false;
-        btn.style.opacity = '';
-        btn.style.pointerEvents = '';
-        btn.innerHTML = original;
+    btn.disabled = true; btn.style.opacity = '.7'; btn.innerHTML = 'Saving…';
+    try{ await saveEditedSaree(form); }
+    finally{
+      if(document.body.contains(btn)){
+        btn.disabled = false; btn.style.opacity = ''; btn.innerHTML = original;
       }
     }
     return;
   }
-    if(e.target.id === 'addPhotoClear'){
-    ADD_FILE = null;
-    document.getElementById('addPhotoInput').value = '';
-    const prev = document.getElementById('addPhotoPreview');
-    const clear = document.getElementById('addPhotoClear');
-    if(prev) prev.innerHTML = `No photo yet —<br>SVG art will be used`;
-    if(clear) clear.style.display = 'none';
+
+  /* Inventory: sorting */
+  if(a === 'sort-inventory'){
+    const sort = el.dataset.sort;
+    if(INVENTORY_SORT === sort){
+      INVENTORY_SORT_DIR = INVENTORY_SORT_DIR === 'asc' ? 'desc' : 'asc';
+    } else {
+      INVENTORY_SORT = sort;
+      INVENTORY_SORT_DIR = sort === 'name' ? 'asc' : 'desc';
+    }
+    INVENTORY_SHOWN = INVENTORY_PAGE_SIZE;
+    updateInventoryTable();
     return;
   }
-    if(a === 'clear-add-photo'){
-    if(ADD_FILE_URL){ URL.revokeObjectURL(ADD_FILE_URL); }
-    ADD_FILE = null;
-    ADD_FILE_URL = null;
-    const inp = document.getElementById('addPhotoInput');
-    if(inp) inp.value = '';
-    const prev = document.getElementById('addPhotoPreview');
-    const clear = document.getElementById('addPhotoClear');
-    if(prev) prev.innerHTML = `No photo yet —<br>SVG art will be used`;
-    if(clear) clear.style.display = 'none';
+
+  /* Inventory: show more */
+  if(a === 'show-more-inventory'){
+    INVENTORY_SHOWN += INVENTORY_PAGE_SIZE;
+    updateInventoryTable();
     return;
   }
-      if(a === 'tl-filter'){
-    TIMELINE_FILTER = el.dataset.filter;
-    TIMELINE_SHOWN = TIMELINE_PAGE_SIZE;   // reset pagination when switching filters
-    render();
+
+  /* Inventory: clear search */
+  if(a === 'clear-inventory-search'){
+    INVENTORY_QUERY = '';
+    INVENTORY_SHOWN = INVENTORY_PAGE_SIZE;
+    const input = document.getElementById('inventorySearch');
+    if(input) input.value = '';
+    updateInventoryTable();
+    if(input) input.focus();
     return;
   }
-  if(a === 'tl-show-more'){
-    TIMELINE_SHOWN += TIMELINE_PAGE_SIZE;
-    render();
-    return;
-  }
+
+  if(a === 'tl-filter'){ TIMELINE_FILTER = el.dataset.filter; TIMELINE_SHOWN = TIMELINE_PAGE_SIZE; render(); return; }
+  if(a === 'tl-show-more'){ TIMELINE_SHOWN += TIMELINE_PAGE_SIZE; render(); return; }
 });
 
-document.addEventListener('change', e => {
-  if(e.target.matches('[data-action="update-stock"]')) stageStock(e.target.dataset.id, e.target.value);
-      if(e.target.id === 'addPhotoInput'){
-    if(ADD_FILE_URL){ URL.revokeObjectURL(ADD_FILE_URL); }
-    ADD_FILE = e.target.files[0] || null;
-    ADD_FILE_URL = ADD_FILE ? URL.createObjectURL(ADD_FILE) : null;
-    const prev = document.getElementById('addPhotoPreview');
-    const clear = document.getElementById('addPhotoClear');
-    if(prev){
-      prev.innerHTML = ADD_FILE_URL
-        ? `<img src="${ADD_FILE_URL}" alt="" />`
-        : `No photo yet —<br>SVG art will be used`;
-    }
-    if(clear) clear.style.display = ADD_FILE ? 'inline-flex' : 'none';
+document.addEventListener('change', async e => {
+  if(e.target.matches('[data-action="update-stock"]')){
+    stageStock(e.target.dataset.id, e.target.value);
+    return;
   }
-    if(e.target.id === 'editPhotoInput'){
-    if(EDITING_FILE_URL){ URL.revokeObjectURL(EDITING_FILE_URL); }
-    EDITING_FILE = e.target.files[0] || null;
-    EDITING_FILE_URL = EDITING_FILE ? URL.createObjectURL(EDITING_FILE) : null;
-    EDITING_REMOVE = false;
-    render();
+  if(e.target.matches('[data-action="add-images"]')){
+    const input = e.target;
+    const target = input.dataset.target;
+    const fileArr = Array.from(input.files || []);
+    input.value = '';
+    if(!fileArr.length) return;
+    await addImagesFromFiles(fileArr, target);
+    return;
   }
 });
 
 document.addEventListener('input', e => {
-    if(e.target.id === 'inventorySearch'){
-    const q = e.target.value.toLowerCase().trim();
-    const rows = document.querySelectorAll('.table-wrap tbody tr');
-    rows.forEach(row => {
-      const text = (row.textContent || '').toLowerCase();
-      row.style.display = text.includes(q) ? '' : 'none';
-    });
+  if(e.target.id === 'inventorySearch'){
+    INVENTORY_QUERY = e.target.value;
+    INVENTORY_SHOWN = INVENTORY_PAGE_SIZE;
+    updateInventoryTable();
     return;
   }
   if(e.target.matches('[data-action="update-stock"]')){
     clearTimeout(e.target._t);
     e.target._t = setTimeout(() => stageStock(e.target.dataset.id, e.target.value), 300);
+    return;
+  }
+  if(e.target.matches('[data-action="image-name"]')){
+    updateImageName(e.target.dataset.target, e.target.dataset.imgid, e.target.value);
+    return;
   }
 });
 
@@ -2026,47 +2320,45 @@ document.addEventListener('submit', async e => {
   const fd = new FormData(form);
 
   if(kind === 'signup'){
-    const p = (fd.get('password') || '').toString();
+    const p = String(fd.get('password') || '');
     if(p.length < 8){ authMsg = { type:'error', text:'Password must be at least 8 characters.' }; render(); return; }
-    await signUp(fd.get('email').toString().trim(), p);
-    return;
+    await signUp(String(fd.get('email')).trim(), p); return;
   }
   if(kind === 'signin'){
-    await signIn(fd.get('email').toString().trim(), fd.get('password').toString());
-    return;
+    await signIn(String(fd.get('email')).trim(), String(fd.get('password'))); return;
   }
   if(kind === 'reset-password'){
-    await sendReset(fd.get('email').toString().trim());
-    return;
+    await sendReset(String(fd.get('email')).trim()); return;
   }
   if(kind === 'set-new-password'){
-    const p = (fd.get('password') || '').toString();
-    const c = (fd.get('confirm') || '').toString();
+    const p = String(fd.get('password') || ''), c = String(fd.get('confirm') || '');
     if(p.length < 8){ toast('Password too short', 'error'); return; }
     if(p !== c){ toast('Passwords do not match', 'error'); return; }
     await changePassword(p);
     history.replaceState(null, '', location.pathname);
-    location.reload();
-    return;
+    location.reload(); return;
   }
   if(kind === 'change-password'){
-    const p = (fd.get('password') || '').toString();
-    const c = (fd.get('confirm') || '').toString();
+    const p = String(fd.get('password') || ''), c = String(fd.get('confirm') || '');
     if(p.length < 8){ toast('Password too short', 'error'); return; }
     if(p !== c){ toast('Passwords do not match', 'error'); return; }
-    await changePassword(p);
-    form.reset();
-    return;
+    await changePassword(p); form.reset(); return;
   }
-    if(kind === 'add-saree'){
+  if(kind === 'add-saree'){
     await addSaree(form);
     form.reset();
-    ADD_FILE = null;
-    const prev = document.getElementById('addPhotoPreview');
-    const clear = document.getElementById('addPhotoClear');
-    if(prev) prev.innerHTML = `No photo yet —<br>SVG art will be used`;
-    if(clear) clear.style.display = 'none';
-    document.querySelectorAll('.palette-swatch')[0]?.click();
+    const addForm = document.getElementById('addForm');
+    if(addForm){
+      document.querySelectorAll('#addForm .type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'saree'));
+      document.getElementById('addProductType').value = 'saree';
+      addForm.querySelector('[data-blouse-wrap]').style.display = '';
+      addForm.querySelector('[data-sizes-wrap]').style.display = 'none';
+      document.querySelectorAll('#addForm .size-chip').forEach(c => { c.classList.remove('active'); const i = c.querySelector('input'); if(i) i.checked = false; });
+      document.querySelectorAll('[data-palette-add] .palette-swatch').forEach((s,i) => s.classList.toggle('active', i === 0));
+      document.getElementById('pC1').value = '#8C2342';
+      document.getElementById('pC2').value = '#4A0F23';
+      document.getElementById('pGold').value = '#D9B96A';
+    }
     return;
   }
 });
@@ -2075,8 +2367,7 @@ document.addEventListener('submit', async e => {
    INIT
    ========================================================================= */
 (async function init(){
-  if(!sb){ render(); return; }
-  const isReset = await handleResetRedirect();
+  await handleResetRedirect();
   await loadSession();
   if(SESSION){
     await loadSarees();
@@ -2085,7 +2376,6 @@ document.addEventListener('submit', async e => {
   }
   render();
 
-  // Session state changes (login, logout, token refresh)
   sb.auth.onAuthStateChange(async (_evt, session) => {
     SESSION = session;
     if(session){
